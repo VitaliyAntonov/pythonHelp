@@ -1,7 +1,7 @@
-from collections import deque
-def search(lines, pattern, history=5):
-    previous_lines = deque(maxlen=history)
-    for line in lines:#Оставляем N последних элементов  25
-        if pattern in line:
-            yield line, previous_lines
-            previous_lines.append(line)
+def numbers_range(n):
+    for i in range(n):
+        yield i
+a = numbers_range(4)
+print(type(a))
+for b in a:
+    print(b)
