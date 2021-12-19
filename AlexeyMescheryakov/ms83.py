@@ -1,1 +1,3 @@
-print('I is here')
+import main
+
+main.print_hi('Alex')
