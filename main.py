@@ -5,7 +5,7 @@
 
 # Добавьте папку со своим именемФамилией в дерево проекта для продолжения работы
 
-def print_hi(name):irinaSmirnova
+def print_hi(name):
     print(f'Hi, {name}')
 
 
