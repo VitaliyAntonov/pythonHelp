@@ -1,3 +1,6 @@
-import main
+from AlexeyMescheryakov.MyFunction.debug import ms83
 
-main.print_hi('Alex')
+print(ms83())
+
+
+
