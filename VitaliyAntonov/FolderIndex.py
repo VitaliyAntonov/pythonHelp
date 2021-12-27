@@ -88,8 +88,7 @@ class FolderIndex:
         """ Вывод в консоль списка отсканированных файлов и путей к ним """
         print('Список файлов в сканируемой папке')
         print(f'Всего файлов: {len(self.fileNamesRoad)}')
-        for num in self.fileNamesRoad:
-            feature = num
+        for feature in self.fileNamesRoad:
             s = f'{feature.fileName}  path: '
             for pn in feature.fileRoad:
                 s += '/' + pn
@@ -122,6 +121,12 @@ if __name__ == '__main__':
 
     newScan.debug_fname_file_Road()  # выводим список файлов с путями к ним в консоль
 
-    print(newScan)
+    # print(newScan)
 
+    print("")
+    print("")
 
+    print(FolderIndex.__name__ + "   " + FolderIndex.__doc__)
+
+    print("")
+    print("")
