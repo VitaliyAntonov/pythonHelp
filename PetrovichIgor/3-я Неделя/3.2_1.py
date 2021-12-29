@@ -2,12 +2,11 @@ d = {}
 def update_dictionary(d, key, value):
   #d, key, value = {}, 1, -1
   if d.get(key) != None:
-    d[key] += [value]; print(d)#; return
+    d[key] += [value]#; print(d)#; return
     return
   b=key*2
   if d.get(b) == None:
     d[b] = [value]#; print(d)
-
     return #d[key*2].append(value)
   d[b].append(value)#d[b] = [value]
   return
