@@ -72,3 +72,12 @@ def help_serial_open():
     sio.flush()  # it is buffering. required to get the data out *now*
     hello = sio.readline()
     print(hello == unicode("hello\n"))
+
+
+
+def help_class_serial_Serial():
+    pass
+
+
+
+
