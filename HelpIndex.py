@@ -1,6 +1,6 @@
 from PythonHelpFiles.SetsInfo import SetsInfo
 from PythonHelpFiles.ListInfo import ListInfo
-
+from PythonHelpFiles.DictInfo import DictInfo
 class HelpIndex:
     """ Общий индекс """
 
@@ -33,3 +33,19 @@ class HelpIndex:
 
         # list строки
         ListInfo.list_help()
+
+        # Словари
+        DictInfo.create_help()
+        DictInfo.len_help()
+        DictInfo.x_in_help()
+        DictInfo.clear_help()
+        DictInfo.copy_help()
+        DictInfo.fromkeys_help()
+        DictInfo.get_help()
+        DictInfo.items_help()
+        DictInfo.keys_help()
+        DictInfo.pop_help()
+        DictInfo.popitem_help()
+        DictInfo.setdefault_help()
+        DictInfo.update_help()
+        DictInfo.values_help()
