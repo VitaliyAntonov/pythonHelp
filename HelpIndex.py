@@ -1,4 +1,4 @@
-from pythonHelp.VitaliyAntonov.helpIndex.SetsInfo import SetsInfo
+from PythonHelpFiles.SetsInfo import SetsInfo
 
 
 class HelpIndex:
