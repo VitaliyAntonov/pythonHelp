@@ -4,8 +4,12 @@ for x in s:
     if a==x:ch+=1
     else:
         print(a,end='');print(ch,end='');ch=1
-    a=x
-    while a==x:
-        #ch+=1
-        break
+'''
+s = input()
+a=x
+while a==x:
+    ch+=1
+    break
 print(a,end='');print(ch,end='')
+Понравившийся код
+'''
