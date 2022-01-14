@@ -1,6 +1,8 @@
 from PythonHelpFiles.SetsInfo import SetsInfo
 from PythonHelpFiles.ListInfo import ListInfo
 from PythonHelpFiles.DictInfo import DictInfo
+
+
 class HelpIndex:
     """ Общий индекс """
 

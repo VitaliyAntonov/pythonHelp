@@ -2,7 +2,7 @@ from requests import get
 #inf = open('/home/petrovich/Downloads/dataset.txt')
 #inf = open('/home/petrovich/Soft/pycharm-community-2021.3/TiachDonload/Prover004.txt')
 #with open("/home/petrovich/Downloads/dataset_3378_2 (1).txt", "r") as inf:
-with open('/home/petrovich/Downloads/dataset_3378_3.txt', 'r') as inf:
+with open('/home/petrovich/Downloads/dataset_3378_3 (2).txt', 'r') as inf:
     line = inf.readline().strip()# Строка из файла
     print('line-', line)
     obl = get(line) # Запрос по строке из файла
