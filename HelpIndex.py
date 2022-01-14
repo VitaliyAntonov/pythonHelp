@@ -1,5 +1,5 @@
 from PythonHelpFiles.SetsInfo import SetsInfo
-
+from PythonHelpFiles.ListInfo import ListInfo
 
 class HelpIndex:
     """ Общий индекс """
@@ -31,5 +31,5 @@ class HelpIndex:
         SetsInfo.pop_help()
         SetsInfo.clear_help()
 
-
-
+        # list строки
+        ListInfo.list_help()
