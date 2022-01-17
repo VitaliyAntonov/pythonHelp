@@ -1,12 +1,15 @@
 from PythonHelpFiles.SetsInfo import SetsInfo
 from PythonHelpFiles.ListInfo import ListInfo
 from PythonHelpFiles.DictInfo import DictInfo
+from PythonHelpFiles.FailInfo import FailInfo
 
 
 class HelpIndex:
     """ Общий индекс """
 
     def __init__(self):
+        #Fails Файлы
+        FailInfo.open_help()
 
         # Множества
         SetsInfo.create_help()
