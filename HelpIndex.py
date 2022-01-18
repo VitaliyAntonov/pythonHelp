@@ -10,6 +10,11 @@ class HelpIndex:
     def __init__(self):
         #Fails Файлы
         FailInfo.open_help()
+        FailInfo.read_help()
+        FailInfo.write_help()
+        FailInfo.close_help()
+        FailInfo.example_help() # начало примера write_help()
+
 
         # Множества
         SetsInfo.create_help()
