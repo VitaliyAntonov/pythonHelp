@@ -1,20 +1,12 @@
 from PythonHelpFiles.SetsInfo import SetsInfo
 from PythonHelpFiles.ListInfo import ListInfo
 from PythonHelpFiles.DictInfo import DictInfo
-from PythonHelpFiles.FailInfo import FailInfo
 
 
 class HelpIndex:
     """ Общий индекс """
 
     def __init__(self):
-        #Fails Файлы
-        FailInfo.open_help()
-        FailInfo.read_help()
-        FailInfo.write_help()
-        FailInfo.close_help()
-        FailInfo.example_help() # начало примера write_help()
-
 
         # Множества
         SetsInfo.create_help()
@@ -41,23 +33,8 @@ class HelpIndex:
         SetsInfo.pop_help()
         SetsInfo.clear_help()
 
-        # Списки
-        ListInfo.create_help()
-        ListInfo.len_help()
-        ListInfo.x_in_help()
-        ListInfo.min_help()
-        ListInfo.max_help()
-        ListInfo.append_help()
-        ListInfo.extend_help()
-        ListInfo.insert_help()
-        ListInfo.remove_help()
-        ListInfo.pop_help()
-        ListInfo.index_help()
-        ListInfo.count_help()
-        ListInfo.sort_help()
-        ListInfo.reverse_help()
-        ListInfo.copy_help()
-        ListInfo.clear_help()
+        # list строки
+        ListInfo.list_help()
 
         # Словари
         DictInfo.create_help()
