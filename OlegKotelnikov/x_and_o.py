@@ -1,4 +1,5 @@
 import random
+import sys
 
 t = [[0 for x in range(14)] for y in range(8)]
 t[0] = [' ', ' ', ' ', 'A', ' ', ' ', ' ', 'B', ' ', ' ', ' ', 'C', ' ', ' ']
@@ -44,9 +45,6 @@ def calc_table(x = '0', y = '0', s = ''):
     valid_t.remove([y, x])
     print_table()
     win(s)
-    if winner != '':
-        print(f'Поздравляю {winner} с победой!')
-        return exit()
     global h
     h += 1
 
@@ -97,6 +95,9 @@ print()
 print('Пример ввода координат - a 1')
 print_table()
 while h < n:
+    if winner != '':
+        print(f'Поздравляю {winner} с победой!')
+        break
     if player1 == h % 2 or player2 == h % 2:
         a = input('x y - ').split(' ')
         try:
