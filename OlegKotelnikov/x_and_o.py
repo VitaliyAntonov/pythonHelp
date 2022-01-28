@@ -1,5 +1,4 @@
 import random
-import sys
 
 t = [[0 for x in range(14)] for y in range(8)]
 t[0] = [' ', ' ', ' ', 'A', ' ', ' ', ' ', 'B', ' ', ' ', ' ', 'C', ' ', ' ']
