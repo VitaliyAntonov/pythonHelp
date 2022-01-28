@@ -17,7 +17,6 @@ valid_t = [[2, 3],[2, 7],[2, 11],[4, 3],[4, 11],[4, 7],[6, 3],[6, 7],[6, 11]]
 nonvalid_t = []
 
 def calc_table(x = '0', y = '0', s = ''):
-
     if x == 'A' or x == 'a' or x == 3:
         x = 3
     elif x == 'B' or x == 'b' or x == 7:
@@ -58,12 +57,10 @@ def rnd_move(s):
 
 def ai_move(s):
     win_move(s)
-    if winner == '':
+    if r:
         def_move(s)
-#    if nonvalid_t == []:
-#        rnd_move(s)
-#        return
-#    else:
+        if r:
+            rnd_move(s)
 
 
 def win_move(s):
@@ -71,44 +68,20 @@ def win_move(s):
         ss = '0'
     else:
         ss = 'X'
-    for i in (2, 4, 6):
-        for j in (3, 7, 11):
-            jj = j + 4 if j < 11 else j - 8
-            jjj = jj + 4 if jj < 11 else j - 4
-            if [i, j] in valid_t and [i, jj, ss] in nonvalid_t and [i, jjj, ss] in nonvalid_t:
-                calc_table(j, i, s)
-                return
-    for i in (3, 7, 11):
-        for j in (2, 4, 6):
-            jj = j + 2 if j < 6 else j - 4
-            jjj = jj + 2 if jj < 6 else j - 2
-            if [j, i] in valid_t and [jj, i, ss] in nonvalid_t and [jjj, i, ss] in nonvalid_t:
-                calc_table(i, j, s)
-                return
-    if [2, 3] in valid_t and [4, 7, ss] in nonvalid_t and [6, 11, ss] in nonvalid_t:
-        calc_table(3, 2, s)
-        return
-    if [4, 7] in valid_t and [2, 3, ss] in nonvalid_t and [6, 11, ss] in nonvalid_t:
-        calc_table(7, 4, s)
-        return
-    if [6, 11] in valid_t and [4, 7, ss] in nonvalid_t and [2, 3, ss] in nonvalid_t:
-        calc_table(11, 6, s)
-        return
-    if [2, 11] in valid_t and [4, 7, ss] in nonvalid_t and [6, 3, ss] in nonvalid_t:
-        calc_table(11, 2, s)
-        return
-    if [4, 7] in valid_t and [2, 11, ss] in nonvalid_t and [6, 3, ss] in nonvalid_t:
-        calc_table(7, 4, s)
-        return
-    if [6, 3] in valid_t and [4, 7, ss] in nonvalid_t and [2, 11, ss] in nonvalid_t:
-        calc_table(3, 6, s)
-        return
+    move(s, ss)
+    return r
 
 def def_move(s):
     if s == 0:
         ss = '0'
     else:
         ss = 'X'
+    move(s, ss)
+    return r
+
+def move(s, ss):
+    global r
+    r = False
     for i in (2, 4, 6):
         for j in (3, 7, 11):
             jj = j + 4 if j < 11 else j - 8
@@ -141,7 +114,8 @@ def def_move(s):
     if [6, 3] in valid_t and [4, 7, ss] in nonvalid_t and [2, 11, ss] in nonvalid_t:
         calc_table(3, 6, s)
         return
-    rnd_move(s)
+    r = True
+    return r
 
 def print_table():
     for i in range(8):
