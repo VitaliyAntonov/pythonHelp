@@ -48,13 +48,6 @@ def calc_table(x = '0', y = '0', s = ''):
     global h
     h += 1
 
-def rnd_move(s):
-    if [4, 7] in valid_t:
-        calc_table(7, 4, s)
-    else:
-        a = random.choice(valid_t)
-        calc_table(a[1], a[0], s)
-
 def ai_move(s):
     win_move(s)
     if r:
@@ -62,6 +55,12 @@ def ai_move(s):
         if r:
             rnd_move(s)
 
+def rnd_move(s):
+    if [4, 7] in valid_t:
+        calc_table(7, 4, s)
+    else:
+        a = random.choice(valid_t)
+        calc_table(a[1], a[0], s)
 
 def win_move(s):
     if s == 1:
@@ -128,11 +127,9 @@ def win(s):
     for i in range(2, 7, 2):
         if t[i][3] == t[i][7] == t[i][11] == s:
             winner = s
-
     for j in range(3, 12, 4):
         if t[2][j] == t[4][j] == t[6][j] == s:
             winner = s
-
     if t[2][3] == t[4][7] == t[6][11] == s or t[6][3] == t[4][7] == t[2][11] == s:
         winner = s
     if winner != '':
@@ -163,7 +160,6 @@ print('Пример ввода координат - a 1')
 print_table()
 print()
 while h < n:
-
     if player1 == h % 2 or player2 == h % 2:
         a = input('x y - ').split(' ')
         try:
