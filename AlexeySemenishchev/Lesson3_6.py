@@ -1,7 +1,7 @@
 import requests
 
 '''r = requests.get('http://example.com')      #пустой GET запрос
-print(r.text)'''                               #вывод ответа от сервера
+print(r.text)                               #вывод ответа от сервера'''
 
 '''url = 'http://example.com'
 par = {'key1': 'value1', 'key2': 'value2'}         
