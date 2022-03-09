@@ -59,4 +59,6 @@ class HelpIndex:
         FailInfo.open_help()
         FailInfo.read_help()
         FailInfo.write_help()
+        FailInfo.seek_help()
+        FailInfo.tell_help()
 
