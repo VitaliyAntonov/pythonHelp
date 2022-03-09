@@ -1,6 +1,7 @@
 from PythonHelpFiles.SetsInfo import SetsInfo
 from PythonHelpFiles.ListInfo import ListInfo
 from PythonHelpFiles.DictInfo import DictInfo
+from PythonHelpFiles.FailInfo import FailInfo
 
 
 class HelpIndex:
@@ -51,3 +52,11 @@ class HelpIndex:
         DictInfo.setdefault_help()
         DictInfo.update_help()
         DictInfo.values_help()
+
+        #Fail Файлы
+        FailInfo.close_help()
+        FailInfo.example_help()
+        FailInfo.open_help()
+        FailInfo.read_help()
+        FailInfo.write_help()
+
