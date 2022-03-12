@@ -1,0 +1,172 @@
+# Крестики нолики
+board = list(range(10)) # создание игрового поля 1.0 (9 клеточек)
+
+# Создание игрового поля 2.0 (таблица 3х3 клеточек)
+def create_board(board):
+   print(13 * '—')
+   for i in range(3):
+      print('|', board[1+i*3], '|', board[2+i*3], '|', board[3+i*3], '|')
+      print(13 * '—')
+# create_board(board)
+
+# Создание выигрышных позиций
+win_position = ((1,2,3), (4,5,6), (7,8,9), (1,4,7), (2,5,8), (3,6,9), (1,5,9), (3,5,7)) # все варианты победы
+
+# Реализация ходов игроков 
+def take_turn(player_turn):
+  A = False
+  while not A:
+    print('Введите число от 1 до 9.')
+    print('Ход -', player_turn)
+    Turn = int(input('Куда поставить? - '))
+    # Це проверка ввода 
+    try:
+      check = Turn
+      check >= 1
+      check <= 9
+    except:
+      print('Неправильный ввод.')
+    # Проверка клетки / ход 
+    if str(board[Turn]) not in 'XO':
+      board[Turn] = player_turn
+      A = True
+    else:
+      print('Данная клетка уже занята 🙁')
+
+# Реализация ходов бота
+def bot_turn(Bot_Turn):
+  B = False
+  bot = 0
+  corners = [1, 3, 7, 9]
+  maybe_draw = [2, 4, 6, 8]
+  random.shuffle(corners)
+  random.shuffle(maybe_draw)
+  while not B:
+    # Условие 1 (Позиции за 1 ход до победы)
+    for k in win_position:
+      if board[k[0]] == board[k[1]] and str(board[k[2]]) not in 'XO':
+        bot = k[2]
+      elif board[k[1]] == board[k[2]] and str(board[k[0]]) not in 'XO':
+        bot = k[0]
+      elif board[k[0]] == board[k[2]] and str(board[k[1]]) not in 'XO':
+        bot = k[1]
+    if bot != 0:
+      board[bot] = Bot_Turn
+      B = True
+      bot = 0
+    else:
+      if str(board[5]) not in 'XO':
+        board[5] = Bot_Turn
+      elif str(board[corners[0]]) not in 'XO':
+        board[corners[0]] = Bot_Turn
+      elif str(board[corners[1]]) not in 'XO':
+        board[corners[1]] = Bot_Turn
+      elif str(board[corners[2]]) not in 'XO':
+        board[corners[2]] = Bot_Turn
+      elif str(board[corners[3]]) not in 'XO':
+        board[corners[3]] = Bot_Turn
+      elif str(board[maybe_draw[0]]) not in 'XO':
+        board[maybe_draw[0]] = Bot_Turn
+      elif str(board[maybe_draw[1]]) not in 'XO':
+        board[maybe_draw[1]] = Bot_Turn
+      elif str(board[maybe_draw[2]]) not in 'XO':
+        board[maybe_draw[2]] = Bot_Turn
+      elif str(board[maybe_draw[2]]) not in 'XO':
+        board[maybe_draw[2]] = Bot_Turn
+      B = True
+
+# Проверка выигрышных позиций
+def check_win_position(board):
+  for j in win_position:
+    # print(board[j[0]], board[j[1]], board[j[2]])
+    if board[j[0]] == board[j[1]] == board[j[2]]: #Если все символы (Х или О) равны
+      return board[j[0]]
+  return False
+
+# Запуск игры 1 на 1 (Мультиплеер)
+# Первые ходят "Крестики"
+def play_game_multiplayer(board):
+  Turns = 0
+  Win = False
+  while not Win: 
+    create_board(board)
+    # Ход игрока 
+    if Turns % 2 == 0:
+      take_turn('X')
+    else:
+      take_turn('O')
+    Turns += 1
+    # Проверка выигрышных позиций в процессе игры
+    if Turns >= 4:
+      check_win = check_win_position(board)
+      if check_win:
+        print('🎉 Поздравляем ',check_win,', ты победил! 🎉', sep = '')
+        Win = True
+        break
+      if Turns == 9:
+        print('🤝🏻 Ничья! Победила дружба! 🤝🏻')
+        break
+
+# Запуск игры с ботом (синглплеер)
+def play_game_singleplayer(board):
+  Turns = 0
+  Win = False
+  First_turn = random.randint(1,2)
+  if First_turn == 1:
+    print('Ваш ход первый')
+    while not Win: 
+      create_board(board)
+      # Ход игрока 
+      if Turns % 2 == 0:
+        take_turn('X')
+      else:
+        bot_turn('O')
+      Turns += 1
+      # Проверка выигрышных позиций в процессе игры
+      if Turns >= 4:
+        check_win = check_win_position(board)
+        if check_win:
+          if check_win == 'X':
+            print('🎉 Поздравляем, ты победил! 🎉', sep = '')
+            Win = True
+            break
+          elif check_win == 'O':
+            print('🤖 Победил искусственный интелект 🤖')
+            Win = True
+            break
+        if Turns == 9:
+          print('🤝🏻 Ничья! Победила дружба! 🤝🏻')
+          break
+    
+  else:
+    print('Бот ходит первым')
+    while not Win: 
+      create_board(board)
+      # Ход игрока 
+      if Turns % 2 == 0:
+        bot_turn('X')
+      else:
+        take_turn('O')
+      Turns += 1
+      # Проверка выигрышных позиций в процессе игры
+      if Turns >= 4:
+        check_win = check_win_position(board)
+        if check_win:
+          if check_win == 'O':
+            print('🎉 Поздравляем, ты победил! 🎉', sep = '')
+            Win = True
+            break
+          elif check_win == 'X':
+            print('🤖 Победил искусственный интелект 🤖')
+            Win = True
+            break
+        if Turns == 9:
+          print('🤝🏻 Ничья! Победила дружба! 🤝🏻')
+          break
+
+
+play_game_multiplayer(board)
+play_game_singleplayer(board)
+create_board(board)
+
+print('Нажмите "Enter" чтобы начать снова.')
