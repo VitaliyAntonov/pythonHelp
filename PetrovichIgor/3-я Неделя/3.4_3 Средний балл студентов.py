@@ -5,6 +5,7 @@ s = inf.readline().strip().split(';')  # ['Youmans', '59', '83', '45']
 lst, i, mat, fiz, rus = [], 0, 0, 0, 0
 while s != ['']:
     #print('s=', s)
+
     #lst += s
     #print('lst=', lst)
     sri = round(((float(s[1])+float(s[2])+float(s[3]))/3), 9)

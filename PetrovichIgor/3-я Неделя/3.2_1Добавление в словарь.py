@@ -11,7 +11,7 @@ def update_dictionary(d, key, value):
   d[b].append(value)#d[b] = [value]
   return
 
-if __name__ == '__main__':
+if __name__ == '__main__': # Блок проверки
   print('PyCharm')
   print(update_dictionary(d, 1, -1))
   print(d)
