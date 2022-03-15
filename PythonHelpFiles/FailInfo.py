@@ -34,6 +34,8 @@ class FailInfo:
          Так же файл можно открыть в теле цикла WITH
          with open('FailText.txt') as fail:
          Открытие файла 'FailText.txt' в теле цикла with в переменную fail без закрытия (при выходе из цикла)
+        with open(path, 'r', encoding='utf-8') as fin:
+            for line in fin:
         '''
     #fail = open('FailText.txt')
     #def with {open('FailText.txt') as fail}(self):
