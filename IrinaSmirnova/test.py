@@ -1,6 +1,6 @@
-t =[' ', '|',' ' , '|', " "]
-t1=[' ', '|',' ' , '|', " "]
-t2=[' ', '|',' ' , '|', " "]
+t =[' ', '|',' ' , '|', ' ']
+t1=[' ', '|',' ' , '|', ' ']
+t2=[' ', '|',' ' , '|', ' ']
 a= ['_',' ','_',' ','_']
 d=[t,a,t1,a,t2]
 for i in range(5):
@@ -21,25 +21,16 @@ def tyan():
         print()
 r=0
 while r<10:
-    st1=[d[0][0],d[0][2],d[0][4]]
-    st2=[d[2][0],d[2][2],d[2][4]]
-    st3=[d[4][0],d[4][2],d[4][4]]
-    st8=[d[0][0],d[2][0],d[4][0]]
-    st4=[d[0][2],d[2][2],d[4][2]]
-    st5=[d[0][4],d[2][4],d[4][4]]
-    st6=[d[0][0],d[2][2],d[4][4]]
-    st7=[d[4][0],d[2][2],d[0][4]]
+    r+=1
     if r % 2 == 0:
-        print('введите координаты x')
-    else:
         print('введите координаты 0')
+    else:
+        print('введите координаты х')
     y1, z1 = map(int,input().split())
-    y=0
-    z=0
     if y1 == 1:
-        y=0
-    if z1==1:
-        z=0
+        y = 0
+    if z1 == 1:
+        z = 0
     if y1 == 3:
         y = 4
     if z1 == 2:
@@ -49,42 +40,53 @@ while r<10:
     if z1 == 3:
         z = 4
     if d[y][z] == ' ':
-        r += 1
-        if r<5:
+        if r<=4:
             if r % 2 == 0:
                 tyan()
             else:
                 yan()
-        elif 9>r>=5:
+        elif 9>r>4:
             if r % 2 == 0:
-                yan()
-            else:
                 tyan()
-            if st1.count(st1[0]) == len(st1):
-                print ('вы выйграли')
-                break
-            elif st2.count(st2[0]) == len(st2):
-                print ('вы выйграли')
-                break
-            elif st3.count(st3[0]) == len(st3):
-                print ('вы выйграли')
-                break
-            elif st4.count(st4[0]) == len(st4):
-                print ('вы выйграли')
-                break
-            elif st5.count(st5[0]) == len(st5):
-                print ('вы выйграли')
-                break
-            elif st6.count(st6[0]) == len(st6):
-                print ('вы выйграли')
-                break
-            elif st7.count(st7[0]) == len(st7):
-                print ('вы выйграли')
-                break
-            elif st8.count(st8[0]) == len(st8):
-                print ('вы выйграли')
-                break
+            else:
+                yan()
+        st1 = [d[0][0], d[0][2], d[0][4]]
+        st2 = [d[2][0], d[2][2], d[2][4]]
+        st3 = [d[4][0], d[4][2], d[4][4]]
+        st8 = [d[0][0], d[2][0], d[4][0]]
+        st4 = [d[0][2], d[2][2], d[4][2]]
+        st5 = [d[0][4], d[2][4], d[4][4]]
+        st6 = [d[0][0], d[2][2], d[4][4]]
+        st7 = [d[4][0], d[2][2], d[0][4]]
+        st9 = ['0', '0', '0']
+        st10 = ['x', 'x', 'x']
+        if st1==st9 or  st1==st10:
+            print ('вы выйграли')
+            break
+        elif st2==st9 or  st2==st10:
+            print ('вы выйграли')
+            break
+        elif st3==st9 or  st3==st10:
+            print ('вы выйграли')
+            break
+        elif st4==st9 or  st4==st10:
+            print ('вы выйграли')
+            break
+        elif st5==st9 or  st5==st10:
+            print ('вы выйграли')
+            break
+        elif st6==st9  or  st6==st10:
+            print ('вы выйграли')
+            break
+        elif st7==st10 or  st7==st9:
+            print ('вы выйграли')
+            break
+        elif st8==st9 or  st8==st10:
+            print ('вы выйграли')
+            break
         elif r==9:
             print('ничья')
+            break
     else:
         print('введите сново')
+        r-=1
