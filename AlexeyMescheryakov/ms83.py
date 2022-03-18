@@ -1,6 +1,7 @@
-from AlexeyMescheryakov.MyFunction.debug import ms83
-from AlexeyMescheryakov.MyFunction.ConsoleUpdate import c_update
-from AlexeyMescheryakov.MyFunction.ConsoleUpdate import c_clean
+# from AlexeyMescheryakov.MyFunction.debug import ms83
+# from AlexeyMescheryakov.MyFunction.ConsoleUpdate import c_update
+# from AlexeyMescheryakov.MyFunction.ConsoleUpdate import c_clean
+from pythonHelp.AlexeyMescheryakov.MyFunction.ConsoleUpdate import c_update, c_clean
 
 lst = [[' ', 'A', 'B', 'C'], [1, 'X', '0', '0'], [2, '0', 'X', '0'], [3, '0', '0', 'X']]    # можно строки формировать из списков (так удобнее)
 #lst = ['  | A | B | C', '1 | X | 0 | 0', '2 | 0 | X | 0', '3 | 0 | 0 | X']                 # а можно и сразу строки
