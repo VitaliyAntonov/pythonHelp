@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Крестики-нолики</title>
+  <script src="https://kit.fontawesome.com/cad8e58a52.js" crossorigin="anonymous"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" media="screen and (max-width: 450px)" href="css/mobile.css">
+</head>
+<body>
+  <nav id="main-nav">
+    <div class="wide-container">
+      <div class="logo">
+        <img src="img/logo.svg" alt="">
+        <h1 class="logo-text"><span class="red">крестики</span><span class="blue">нолики</span></h1>
+      </div>      
+    </div>
+  </nav>
+
+  <section id="content-section">
+    <div class="middle-container">
+      <div>
+        <h2 class="field-heading"><span></span><span>ход:</span></h2>
+        <div class="turn-image"></div>
+      </div>
+      <div class="fields-container">
+        <div class="field field0"><div class="field-content"></div></div>
+        <div class="field field1"><div class="field-content"></div></div>
+        <div class="field field2"><div class="field-content"></div></div>
+        <div class="field field3"><div class="field-content"></div></div>
+        <div class="field field4"><div class="field-content"><div class="strikethrough-line-container"><div></div></div></div></div>
+        <div class="field field5"><div class="field-content"></div></div>
+        <div class="field field6"><div class="field-content"></div></div>
+        <div class="field field7"><div class="field-content"></div></div>
+        <div class="field field8"><div class="field-content"></div></div>
+      </div>
+      
+      <button type="button" class="btn play-again-btn"><i class="fas fa-redo-alt"></i> Играть заново</button>
+    </div>
+  </section>
+  
+
+  <footer id="main-footer">
+      <p>&copy; <a href="https://www.vk.com/agreeshin" target="_blank"> Anatoly Greeshin</a> 2022</p>
+  </footer>
+
+  <script src="script/main.js"></script>
+</body>
+</html>
