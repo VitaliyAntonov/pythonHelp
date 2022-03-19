@@ -74,7 +74,7 @@ for i in range(0,n):
         # print(*d[s[i][0]])
         temp = d[s[i][0]]
         temp[1] += 1
-        temp[4] = temp[2] * 3 + temp[2]
+        temp[4] = temp[1] * 3 + temp[2]
         if d.get(s[i][0]) != None:
             temp[0] += 1
         temp2 = d[s[i][2]]
