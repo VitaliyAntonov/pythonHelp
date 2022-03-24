@@ -1,4 +1,4 @@
-package game_checkers;
+п»їpackage game_checkers;
 
 import java.util.Iterator;
 import java.util.Vector;
@@ -10,7 +10,6 @@ public class PossibleWays {
 	String s_freeway = "";	
 	String s_fireway = "";	
 	public PossibleWays(Coordinates a2, Vector<Way> subset_freeway, Vector<Way> subset_fireway) {
-		// TODO Auto-generated constructor stub
 		a = a2;	
 		freeway = subset_freeway;
 		fireway = subset_fireway;
@@ -19,7 +18,6 @@ public class PossibleWays {
 
 
 	public PossibleWays(Coordinates a, Board board) {
-		// TODO Auto-generated constructor stub
 		this.a = a;	
 		if(a == null) {
 			freeway.clear();
@@ -49,29 +47,16 @@ public class PossibleWays {
 	}	
 
 	public Coordinates get_coord() {
-		// TODO Auto-generated method stub
 		return a;
 	}
 
 	public Vector<Way> get_way_attack() {
-		// TODO Auto-generated method stub
 		return fireway;
 	}
 
 	public Vector<Way> get_way_free() {
-		// TODO Auto-generated method stub
 		return freeway;
 	}
 
-//если шаг среди допустимых для данной координаты	
-	@SuppressWarnings("unlikely-arg-type")
-	public boolean allowStep(String step) {
-		// TODO Auto-generated method stub
-		if((step.length() == 5) && (freeway.indexOf(step) > 0 || s_fireway.indexOf(step) > 0)) {
-			return true;
-		} else {
-			return false;
-		}	
-	}
 
 }

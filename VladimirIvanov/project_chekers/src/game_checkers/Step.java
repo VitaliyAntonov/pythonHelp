@@ -1,13 +1,13 @@
-package game_checkers;
+п»їpackage game_checkers;
 
 
-//для анализа ходов и разного представления в данных
+//РґР»СЏ Р°РЅР°Р»РёР·Р° С…РѕРґРѕРІ Рё СЂР°Р·РЅРѕРіРѕ РїСЂРµРґСЃС‚Р°РІР»РµРЅРёСЏ РІ РґР°РЅРЅС‹С…
 public class Step {
 String step;
 Way w;
 Coordinates a;
 Coordinates b;
-Boolean step_is_fire = false; //этот шаг был атакой. если не помечен, не атака
+Boolean step_is_fire = false; //СЌС‚РѕС‚ С€Р°Рі Р±С‹Р» Р°С‚Р°РєРѕР№. РµСЃР»Рё РЅРµ РїРѕРјРµС‡РµРЅ, РЅРµ Р°С‚Р°РєР°
 Boolean flag_initial = true;
 
  public Step(String s) {

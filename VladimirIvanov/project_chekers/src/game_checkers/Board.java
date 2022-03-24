@@ -1,4 +1,4 @@
-/**
+п»ї/**
  * 
  */
 package game_checkers;
@@ -20,35 +20,35 @@ public class Board {
 	PosAndValue cell_destination_after_change = new PosAndValue("", 0, 0);
 	PosAndValue cell_from;
 	Boolean use_curr_enemy_coord = false;
-	String s_next_way_attack; //буквенно-цифровой код следующего возможного хода при многократной атаке
+	String s_next_way_attack; //Р±СѓРєРІРµРЅРЅРѕ-С†РёС„СЂРѕРІРѕР№ РєРѕРґ СЃР»РµРґСѓСЋС‰РµРіРѕ РІРѕР·РјРѕР¶РЅРѕРіРѕ С…РѕРґР° РїСЂРё РјРЅРѕРіРѕРєСЂР°С‚РЅРѕР№ Р°С‚Р°РєРµ
 
 	Boolean step_was_succeess = false;
-	Boolean flag_dont_changed = false; //индикатор перехода права хода (23.03)
+	Boolean flag_dont_changed = false; //РёРЅРґРёРєР°С‚РѕСЂ РїРµСЂРµС…РѕРґР° РїСЂР°РІР° С…РѕРґР° (23.03)
 
 	Boolean active_figure_allow = true;
 
-	public PosAndValue cell_after_enemy = new PosAndValue("", 0, 0); //свободая клетка за вражеской ячейкой
+	public PosAndValue cell_after_enemy = new PosAndValue("", 0, 0); //СЃРІРѕР±РѕРґР°СЏ РєР»РµС‚РєР° Р·Р° РІСЂР°Р¶РµСЃРєРѕР№ СЏС‡РµР№РєРѕР№
 	public Way way_possible_attak;
 	public Vector<Way> fireways_curr_pos; //16.03
-	public Vector<Way> simpleways_curr_pos; //16.03 //если бъет вторым ходом, это очищается
+	public Vector<Way> simpleways_curr_pos; //16.03 //РµСЃР»Рё Р±СЉРµС‚ РІС‚РѕСЂС‹Рј С…РѕРґРѕРј, СЌС‚Рѕ РѕС‡РёС‰Р°РµС‚СЃСЏ
 	
 	Step previous_success_step = new Step("");
 	Boolean last_step_was_attack = true;
 
-	Boolean need_change_motion_after_step; //инициализируется check_double_attack(String)
-	Vector<Step> vstep = new Vector<Step>(); //история ходов
+	Boolean need_change_motion_after_step; //РёРЅРёС†РёР°Р»РёР·РёСЂСѓРµС‚СЃСЏ check_double_attack(String)
+	Vector<Step> vstep = new Vector<Step>(); //РёСЃС‚РѕСЂРёСЏ С…РѕРґРѕРІ
 
 	Boolean patry_not_first = false;
-	Vector<Way> vw_possible_way_next_attak = new Vector<Way>(); //если игрок имеет право продолжить ход атаки, это допустимые ходы
+	Vector<Way> vw_possible_way_next_attak = new Vector<Way>(); //РµСЃР»Рё РёРіСЂРѕРє РёРјРµРµС‚ РїСЂР°РІРѕ РїСЂРѕРґРѕР»Р¶РёС‚СЊ С…РѕРґ Р°С‚Р°РєРё, СЌС‚Рѕ РґРѕРїСѓСЃС‚РёРјС‹Рµ С…РѕРґС‹
 
  	Vector<Way> vpw_fire = new Vector<Way>();
     Vector<Way> vpw_free = new Vector<Way>();
     Vector<Way> vpw_both = new Vector<Way>();
     
-    Boolean end_of_game = false; // индикатор окончания игры. если истина - игра окончена (23.03)
+    Boolean end_of_game = false; // РёРЅРґРёРєР°С‚РѕСЂ РѕРєРѕРЅС‡Р°РЅРёСЏ РёРіСЂС‹. РµСЃР»Рё РёСЃС‚РёРЅР° - РёРіСЂР° РѕРєРѕРЅС‡РµРЅР° (23.03)
 	
  
-//очищает множество простых и боевых ходов    
+//РѕС‡РёС‰Р°РµС‚ РјРЅРѕР¶РµСЃС‚РІРѕ РїСЂРѕСЃС‚С‹С… Рё Р±РѕРµРІС‹С… С…РѕРґРѕРІ    
     public void clear_vpw_fire_and_free() {
     	vpw_fire.clear();
     	vpw_free.clear();
@@ -70,7 +70,7 @@ public class Board {
 	    System.out.println(toPrintFireAndFree());
     }
     
-/** шагов больше нет у того, кто должен ходить, или его пешек не осталось - значит, проиграл */    
+/** С€Р°РіРѕРІ Р±РѕР»СЊС€Рµ РЅРµС‚ Сѓ С‚РѕРіРѕ, РєС‚Рѕ РґРѕР»Р¶РµРЅ С…РѕРґРёС‚СЊ, РёР»Рё РµРіРѕ РїРµС€РµРє РЅРµ РѕСЃС‚Р°Р»РѕСЃСЊ - Р·РЅР°С‡РёС‚, РїСЂРѕРёРіСЂР°Р» */    
     public Boolean there_is_no_steps() {
     	if(vpw_both.size() == 0 || get_set_current_army().size() == 0) {
     		report_end_game();
@@ -81,12 +81,12 @@ public class Board {
     	return end_of_game;
     }
 
-/** сброс флага конца игры*/    
+/** СЃР±СЂРѕСЃ С„Р»Р°РіР° РєРѕРЅС†Р° РёРіСЂС‹*/    
     public void reset_end_of_game() {
     	end_of_game = false;
     }
     
-/** вывод сообщения на экран о результатах игры */    
+/** РІС‹РІРѕРґ СЃРѕРѕР±С‰РµРЅРёСЏ РЅР° СЌРєСЂР°РЅ Рѕ СЂРµР·СѓР»СЊС‚Р°С‚Р°С… РёРіСЂС‹ */    
     public void report_end_game() {
     	if(motion) {
     		System.out.println("Black win");
@@ -102,7 +102,7 @@ public class Board {
 	
 	public Board (String[][] board) {
 		this.board = board;
-		motion = true;//ход белых
+		motion = true;//С…РѕРґ Р±РµР»С‹С…
 	}
 
 	public Boolean get_motion(){
@@ -122,7 +122,7 @@ public class Board {
 			return false;
 		}
 		
-		if(motion) { //белые
+		if(motion) { //Р±РµР»С‹Рµ
 			if(checkers == Static.w_e || checkers == Static.w_d) {
 				return false;
 			} else {
@@ -130,7 +130,7 @@ public class Board {
 			    return true;
 			}
 			}
-		} else {     //черные
+		} else {     //С‡РµСЂРЅС‹Рµ
 			if(checkers == Static.b_e || checkers == Static.b_d) {
 				return false;
 			} else {
@@ -180,11 +180,11 @@ public class Board {
 			
 			if(Static.isSimpleCheckers(first_chekers)) {
 				if(vpnv.size() != 3) {
-					possibility_attak = false; //ограничение для пешки
+					possibility_attak = false; //РѕРіСЂР°РЅРёС‡РµРЅРёРµ РґР»СЏ РїРµС€РєРё
 				}
 			}
         }
-        return possibility_attak; //возвращает возможность атаки		
+        return possibility_attak; //РІРѕР·РІСЂР°С‰Р°РµС‚ РІРѕР·РјРѕР¶РЅРѕСЃС‚СЊ Р°С‚Р°РєРё		
 	}
 	
 	public Boolean possible_attack(Vector<PosAndValue> vpnv) {
@@ -213,8 +213,8 @@ public class Board {
 					counter_friend++;
 				};
 				if(enemy_detected && pnv.get_value() == Static.sp2) {
-					//если следующая за вражеским пустая
-					//то это клетка, ход на которую можно сделать
+					//РµСЃР»Рё СЃР»РµРґСѓСЋС‰Р°СЏ Р·Р° РІСЂР°Р¶РµСЃРєРёРј РїСѓСЃС‚Р°СЏ
+					//С‚Рѕ СЌС‚Рѕ РєР»РµС‚РєР°, С…РѕРґ РЅР° РєРѕС‚РѕСЂСѓСЋ РјРѕР¶РЅРѕ СЃРґРµР»Р°С‚СЊ
 					cell_after_enemy = pnv;
 				}
 			}
@@ -227,27 +227,27 @@ public class Board {
 			
 			if(Static.isSimpleCheckers(first_chekers)) {
 				if(vpnv.size() != 3) {
-					use_curr_enemy_coord = false; //ограничение для пешки
+					use_curr_enemy_coord = false; //РѕРіСЂР°РЅРёС‡РµРЅРёРµ РґР»СЏ РїРµС€РєРё
 				}
 			}
         }
-        return use_curr_enemy_coord; //возвращает возможность атаки
+        return use_curr_enemy_coord; //РІРѕР·РІСЂР°С‰Р°РµС‚ РІРѕР·РјРѕР¶РЅРѕСЃС‚СЊ Р°С‚Р°РєРё
 	}
 	
 	public Boolean step_was_attak() {
 		return use_curr_enemy_coord; 
 	}
 
-//был ли предыдущий шаг атакой	
+//Р±С‹Р» Р»Рё РїСЂРµРґС‹РґСѓС‰РёР№ С€Р°Рі Р°С‚Р°РєРѕР№	
 	public Boolean previousStepWasAttack() {
 		return previous_success_step.thisStepWasAttack();
 	}
 	
 	public Boolean is_clear_move(Vector<PosAndValue> vpnv) {//16.03
 		if(vpnv.firstElement().get_value() == Static.sp2 || vpnv.size() <= 1) {
-			return false; //не позволяем ходить с пустой позиции, и если смещение ноль, или если точка не определена
+			return false; //РЅРµ РїРѕР·РІРѕР»СЏРµРј С…РѕРґРёС‚СЊ СЃ РїСѓСЃС‚РѕР№ РїРѕР·РёС†РёРё, Рё РµСЃР»Рё СЃРјРµС‰РµРЅРёРµ РЅРѕР»СЊ, РёР»Рё РµСЃР»Рё С‚РѕС‡РєР° РЅРµ РѕРїСЂРµРґРµР»РµРЅР°
 		}
-		if(vpnv.lastElement().get_value() != Static.sp2) {//если точка назначения непуста, ход невозможен
+		if(vpnv.lastElement().get_value() != Static.sp2) {//РµСЃР»Рё С‚РѕС‡РєР° РЅР°Р·РЅР°С‡РµРЅРёСЏ РЅРµРїСѓСЃС‚Р°, С…РѕРґ РЅРµРІРѕР·РјРѕР¶РµРЅ
 			return false;
 		}
 		if(vpnv.firstElement().get_value() == Static.w_e && motion == true ||
@@ -261,10 +261,10 @@ public class Board {
 			if (vpnv.firstElement().get_value() == Static.w_d && motion == true ||
 			   vpnv.firstElement().get_value() == Static.b_d && motion == false ) {
 				Iterator<PosAndValue> i = vpnv.iterator();
-				if(i.hasNext()) { //пропускаем первый элемент - этой шашкой ходим
+				if(i.hasNext()) { //РїСЂРѕРїСѓСЃРєР°РµРј РїРµСЂРІС‹Р№ СЌР»РµРјРµРЅС‚ - СЌС‚РѕР№ С€Р°С€РєРѕР№ С…РѕРґРёРј
 					i.next();
 				}
-				while(i.hasNext()) { //если все поля пустые
+				while(i.hasNext()) { //РµСЃР»Рё РІСЃРµ РїРѕР»СЏ РїСѓСЃС‚С‹Рµ
 					if(Static.isNotClearField(i.next().get_value()))
 						return false;
 				}
@@ -324,7 +324,7 @@ public class Board {
 			return vpnv;
 		}
 		
-		/**ходим ли мы пешкой*/
+		/**С…РѕРґРёРј Р»Рё РјС‹ РїРµС€РєРѕР№*/
 		public static Boolean isSimpleFirstCheckers(Vector<PosAndValue> vpnv) {
 			return Static.isSimpleCheckers(vpnv.firstElement().get_value());
 		}
@@ -335,10 +335,10 @@ public class Board {
 				if(way.allowed_by_vector_attack(vw_possible_way_next_attak)) {
 					need_change_motion_after_step = false;
 					System.out.println("this step is double-step");
-					return true; //step среди допустимых для выполнения атаки(той же пешкой/дамкой)
+					return true; //step СЃСЂРµРґРё РґРѕРїСѓСЃС‚РёРјС‹С… РґР»СЏ РІС‹РїРѕР»РЅРµРЅРёСЏ Р°С‚Р°РєРё(С‚РѕР№ Р¶Рµ РїРµС€РєРѕР№/РґР°РјРєРѕР№)
 				} else {
-					need_change_motion_after_step = false; //ход будет невозможен, текущий цвет остается
-					return false; //это должнен быть боевой ход той же пешкой, а этот step не среди допустимых
+					need_change_motion_after_step = false; //С…РѕРґ Р±СѓРґРµС‚ РЅРµРІРѕР·РјРѕР¶РµРЅ, С‚РµРєСѓС‰РёР№ С†РІРµС‚ РѕСЃС‚Р°РµС‚СЃСЏ
+					return false; //СЌС‚Рѕ РґРѕР»Р¶РЅРµРЅ Р±С‹С‚СЊ Р±РѕРµРІРѕР№ С…РѕРґ С‚РѕР№ Р¶Рµ РїРµС€РєРѕР№, Р° СЌС‚РѕС‚ step РЅРµ СЃСЂРµРґРё РґРѕРїСѓСЃС‚РёРјС‹С…
 					}
 			} else {
 				return true;
@@ -346,8 +346,8 @@ public class Board {
 		}
 		
 		
-		/**главная процедура: сделать ход.
-		 * перед запуском проверить, что ход step в рамках доски*/
+		/**РіР»Р°РІРЅР°СЏ РїСЂРѕС†РµРґСѓСЂР°: СЃРґРµР»Р°С‚СЊ С…РѕРґ.
+		 * РїРµСЂРµРґ Р·Р°РїСѓСЃРєРѕРј РїСЂРѕРІРµСЂРёС‚СЊ, С‡С‚Рѕ С…РѕРґ step РІ СЂР°РјРєР°С… РґРѕСЃРєРё*/
 		public void make_step(String step) {
 			Vector<PosAndValue> vpnv = get_massive_figure(step);
 			PosAndValue pnv_active_element = vpnv.firstElement();
@@ -369,7 +369,7 @@ public class Board {
 							} else {
 								step_was_succeess = false;
 							}
-						} else { //тут уже ходит дамка, а все остальные ограничения проверены
+						} else { //С‚СѓС‚ СѓР¶Рµ С…РѕРґРёС‚ РґР°РјРєР°, Р° РІСЃРµ РѕСЃС‚Р°Р»СЊРЅС‹Рµ РѕРіСЂР°РЅРёС‡РµРЅРёСЏ РїСЂРѕРІРµСЂРµРЅС‹
 							simple_move(pnv_active_element,pnv_active_move);
 							last_step_was_attack = false;
 						}
@@ -396,7 +396,7 @@ public class Board {
 			}
 
 		
-/** проверка, что ходит тот, чей ход */		
+/** РїСЂРѕРІРµСЂРєР°, С‡С‚Рѕ С…РѕРґРёС‚ С‚РѕС‚, С‡РµР№ С…РѕРґ */		
 		private Boolean allow_color(PosAndValue pnv) {
 			// TODO Auto-generated method stub
 			if(motion) {
@@ -415,7 +415,7 @@ public class Board {
 		}
 
 		/**
-		 * если координаты на противоположной полосе, делаем дамкой
+		 * РµСЃР»Рё РєРѕРѕСЂРґРёРЅР°С‚С‹ РЅР° РїСЂРѕС‚РёРІРѕРїРѕР»РѕР¶РЅРѕР№ РїРѕР»РѕСЃРµ, РґРµР»Р°РµРј РґР°РјРєРѕР№
 		 * */		
 		private void make_damka_if_pos(PosAndValue pnv_active_element) {
 			if(pnv_active_element.value == Static.w_e && pnv_active_element.get_y() == Static.y_white_limit) {
@@ -446,7 +446,7 @@ public Boolean next_attack_if_possible() {
 	while(iways.hasNext()) {
 		if(possible_attack(iways.next().get_massive_figure(this))) {
 			s_next_way_attack = curr_enemy_coord.toNameCell();
-			return true; //атака будет возможна по curr_enemy_coord 
+			return true; //Р°С‚Р°РєР° Р±СѓРґРµС‚ РІРѕР·РјРѕР¶РЅР° РїРѕ curr_enemy_coord 
 		}
 	}
 	s_next_way_attack = "";
@@ -455,7 +455,7 @@ public Boolean next_attack_if_possible() {
 
 		
 /**
- * получить следующий шаг возможной атаки для той же масти, если он возможен*/
+ * РїРѕР»СѓС‡РёС‚СЊ СЃР»РµРґСѓСЋС‰РёР№ С€Р°Рі РІРѕР·РјРѕР¶РЅРѕР№ Р°С‚Р°РєРё РґР»СЏ С‚РѕР№ Р¶Рµ РјР°СЃС‚Рё, РµСЃР»Рё РѕРЅ РІРѕР·РјРѕР¶РµРЅ*/
 public String get_next_way_attack() {
 	return s_next_way_attack;
 }
@@ -482,12 +482,12 @@ public Boolean is_destination_clear(Way way) {
 	return get_cell_x_y(way.get_last_coord().get_x(), way.get_last_coord().get_y()) == Static.sp2;
 }
 
-//индикатор того, что право хода переходит
+//РёРЅРґРёРєР°С‚РѕСЂ С‚РѕРіРѕ, С‡С‚Рѕ РїСЂР°РІРѕ С…РѕРґР° РїРµСЂРµС…РѕРґРёС‚
 public void set_flag_not_changed() {
 	flag_dont_changed = true;
 }
 
-//сброс индикатора права перехода хода
+//СЃР±СЂРѕСЃ РёРЅРґРёРєР°С‚РѕСЂР° РїСЂР°РІР° РїРµСЂРµС…РѕРґР° С…РѕРґР°
 public void remove_flag_not_changed() {
 	flag_dont_changed = false;
 }
@@ -496,7 +496,7 @@ public Way get_way_possible_attak() {
 	return way_possible_attak;
 }
 
-//собирает множество пешек стороны, которая делает ходы в данный момент
+//СЃРѕР±РёСЂР°РµС‚ РјРЅРѕР¶РµСЃС‚РІРѕ РїРµС€РµРє СЃС‚РѕСЂРѕРЅС‹, РєРѕС‚РѕСЂР°СЏ РґРµР»Р°РµС‚ С…РѕРґС‹ РІ РґР°РЅРЅС‹Р№ РјРѕРјРµРЅС‚
 public Vector<PosAndValue> get_set_current_army() {
 	Vector<PosAndValue> vpv = toPosAndValues();
 	Vector<PosAndValue> res = new Vector<PosAndValue>();
@@ -511,7 +511,7 @@ public Vector<PosAndValue> get_set_current_army() {
 	return res;
 }
 
-//переводит все фигуры в множество позиций
+//РїРµСЂРµРІРѕРґРёС‚ РІСЃРµ С„РёРіСѓСЂС‹ РІ РјРЅРѕР¶РµСЃС‚РІРѕ РїРѕР·РёС†РёР№
 private Vector<PosAndValue> toPosAndValues() {
 	Vector<PosAndValue> vpnv = new Vector<PosAndValue>(); 
 	for(int i = 0;i< board.length; i++) {
@@ -526,19 +526,19 @@ public String get_cell_x_y(Coordinates a) {
 	return get_cell_x_y(a.get_x(), a.get_y());
 }
 /**
- * 	//индикатор: прошлая атака была нападением, и для неё новый набор огневых позиций не пуст.
-	//если этот индикатор активен, допустимо использовать для хода только эту пешку
-	//при этом, право хода остается у тех, кто провел атаку
-	 * возвращает результат, пройдена ли проверка. т.е. допустим ли ход step
+ * 	//РёРЅРґРёРєР°С‚РѕСЂ: РїСЂРѕС€Р»Р°СЏ Р°С‚Р°РєР° Р±С‹Р»Р° РЅР°РїР°РґРµРЅРёРµРј, Рё РґР»СЏ РЅРµС‘ РЅРѕРІС‹Р№ РЅР°Р±РѕСЂ РѕРіРЅРµРІС‹С… РїРѕР·РёС†РёР№ РЅРµ РїСѓСЃС‚.
+	//РµСЃР»Рё СЌС‚РѕС‚ РёРЅРґРёРєР°С‚РѕСЂ Р°РєС‚РёРІРµРЅ, РґРѕРїСѓСЃС‚РёРјРѕ РёСЃРїРѕР»СЊР·РѕРІР°С‚СЊ РґР»СЏ С…РѕРґР° С‚РѕР»СЊРєРѕ СЌС‚Сѓ РїРµС€РєСѓ
+	//РїСЂРё СЌС‚РѕРј, РїСЂР°РІРѕ С…РѕРґР° РѕСЃС‚Р°РµС‚СЃСЏ Сѓ С‚РµС…, РєС‚Рѕ РїСЂРѕРІРµР» Р°С‚Р°РєСѓ
+	 * РІРѕР·РІСЂР°С‰Р°РµС‚ СЂРµР·СѓР»СЊС‚Р°С‚, РїСЂРѕР№РґРµРЅР° Р»Рё РїСЂРѕРІРµСЂРєР°. С‚.Рµ. РґРѕРїСѓСЃС‚РёРј Р»Рё С…РѕРґ step
  * */
 public void check_double_attack(String step) {
-//тут есть шаг step - это новый шаг, который хочет сделать игрок
-//	previous_success_step - это предыдущий шаг, который хранит игровое поле
-//	в get_random_step_new(Board) нужно тоже учесть, если мы наткнулись на двойной ход, 
-//	и ограничить ходы нужно только огневыми, и стартовая позиция - это атаковавшая ранее фигура
+//С‚СѓС‚ РµСЃС‚СЊ С€Р°Рі step - СЌС‚Рѕ РЅРѕРІС‹Р№ С€Р°Рі, РєРѕС‚РѕСЂС‹Р№ С…РѕС‡РµС‚ СЃРґРµР»Р°С‚СЊ РёРіСЂРѕРє
+//	previous_success_step - СЌС‚Рѕ РїСЂРµРґС‹РґСѓС‰РёР№ С€Р°Рі, РєРѕС‚РѕСЂС‹Р№ С…СЂР°РЅРёС‚ РёРіСЂРѕРІРѕРµ РїРѕР»Рµ
+//	РІ get_random_step_new(Board) РЅСѓР¶РЅРѕ С‚РѕР¶Рµ СѓС‡РµСЃС‚СЊ, РµСЃР»Рё РјС‹ РЅР°С‚РєРЅСѓР»РёСЃСЊ РЅР° РґРІРѕР№РЅРѕР№ С…РѕРґ, 
+//	Рё РѕРіСЂР°РЅРёС‡РёС‚СЊ С…РѕРґС‹ РЅСѓР¶РЅРѕ С‚РѕР»СЊРєРѕ РѕРіРЅРµРІС‹РјРё, Рё СЃС‚Р°СЂС‚РѕРІР°СЏ РїРѕР·РёС†РёСЏ - СЌС‚Рѕ Р°С‚Р°РєРѕРІР°РІС€Р°СЏ СЂР°РЅРµРµ С„РёРіСѓСЂР°
 	
-//иными словами, расчитывается новый путь атаки фигуры, если она атаковала, 
-//	и в разрешенных оставляется лишь огневые пути этой фигуры
+//РёРЅС‹РјРё СЃР»РѕРІР°РјРё, СЂР°СЃС‡РёС‚С‹РІР°РµС‚СЃСЏ РЅРѕРІС‹Р№ РїСѓС‚СЊ Р°С‚Р°РєРё С„РёРіСѓСЂС‹, РµСЃР»Рё РѕРЅР° Р°С‚Р°РєРѕРІР°Р»Р°, 
+//	Рё РІ СЂР°Р·СЂРµС€РµРЅРЅС‹С… РѕСЃС‚Р°РІР»СЏРµС‚СЃСЏ Р»РёС€СЊ РѕРіРЅРµРІС‹Рµ РїСѓС‚Рё СЌС‚РѕР№ С„РёРіСѓСЂС‹
 	if(last_step_was_attack) {
 		Coordinates a;
 		a = previous_success_step.getSecondPartStep();
@@ -546,9 +546,9 @@ public void check_double_attack(String step) {
 		Vector<Way> p_ways_second_attack = pw.get_way_attack();
 		this.vw_possible_way_next_attak = p_ways_second_attack;
 		if(p_ways_second_attack.size() > 0) {
-     		need_change_motion_after_step = false;//последующая атака доступна
+     		need_change_motion_after_step = false;//РїРѕСЃР»РµРґСѓСЋС‰Р°СЏ Р°С‚Р°РєР° РґРѕСЃС‚СѓРїРЅР°
 		} else {
-			//путей атаки у пешки нет. значит, двойного хода здесь нет, и дальше сработают обычные проверки, право хода переходит
+			//РїСѓС‚РµР№ Р°С‚Р°РєРё Сѓ РїРµС€РєРё РЅРµС‚. Р·РЅР°С‡РёС‚, РґРІРѕР№РЅРѕРіРѕ С…РѕРґР° Р·РґРµСЃСЊ РЅРµС‚, Рё РґР°Р»СЊС€Рµ СЃСЂР°Р±РѕС‚Р°СЋС‚ РѕР±С‹С‡РЅС‹Рµ РїСЂРѕРІРµСЂРєРё, РїСЂР°РІРѕ С…РѕРґР° РїРµСЂРµС…РѕРґРёС‚
 			need_change_motion_after_step = true;
 		}
 	} else {
@@ -560,7 +560,7 @@ public Boolean is_need_change_motion() {
 	return need_change_motion_after_step;
 }
 
-//** вывод истории ходов в строку */
+//** РІС‹РІРѕРґ РёСЃС‚РѕСЂРёРё С…РѕРґРѕРІ РІ СЃС‚СЂРѕРєСѓ */
 public String printHistory() {
 	Iterator<Step> i = vstep.iterator();
 	String s = "";
@@ -571,7 +571,7 @@ public String printHistory() {
 }
 
 public String printHistoryLine() {
-	// пример "g3-h4,f6-e5,h4-g5,e5-d4,e3-c5,d6-b4,c3-a5,h6-f4,f2-g3,f4-e3,d2-f4,b6-c5,g3-h4,e7-d6,f4-g5,c5-d4,b2-c3,d4-b2,a1-c3,d6-c5,c3-b4,c7-b6,b4-d6,b6-c5,d6-b4,d8-c7,h2-g3,f8-e7,c1-b2,g7-f6,g3-f4,f6-e5,f4-d6,d6-f8,c7-d6,f8-c5,h8-g7,c5-e7,g7-h6,g1-h2,h6-f4,e7-f6,f4-g3,h4-f2,a7-b6,a5-c7,b8-d6,h2-g3,d6-e5,f6-d4";
+	// РїСЂРёРјРµСЂ "g3-h4,f6-e5,h4-g5,e5-d4,e3-c5,d6-b4,c3-a5,h6-f4,f2-g3,f4-e3,d2-f4,b6-c5,g3-h4,e7-d6,f4-g5,c5-d4,b2-c3,d4-b2,a1-c3,d6-c5,c3-b4,c7-b6,b4-d6,b6-c5,d6-b4,d8-c7,h2-g3,f8-e7,c1-b2,g7-f6,g3-f4,f6-e5,f4-d6,d6-f8,c7-d6,f8-c5,h8-g7,c5-e7,g7-h6,g1-h2,h6-f4,e7-f6,f4-g3,h4-f2,a7-b6,a5-c7,b8-d6,h2-g3,d6-e5,f6-d4";
 	Iterator<Step> i = vstep.iterator();
 	String s = "History steps: ";
 	while(i.hasNext()) {

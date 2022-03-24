@@ -1,4 +1,4 @@
-package game_checkers;
+﻿package game_checkers;
 
 public class PosAndValue {
 

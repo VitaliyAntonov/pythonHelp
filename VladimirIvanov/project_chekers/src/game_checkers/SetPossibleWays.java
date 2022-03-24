@@ -1,4 +1,4 @@
-package game_checkers;
+﻿package game_checkers;
 
 import java.util.Iterator;
 import java.util.Vector;

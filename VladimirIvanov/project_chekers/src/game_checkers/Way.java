@@ -1,4 +1,4 @@
-package game_checkers;
+п»їpackage game_checkers;
 
 import java.util.Iterator;
 import java.util.Vector;
@@ -23,7 +23,7 @@ public class Way {
 		calc_direction();
 	}
 
-/** создает путь из хода. вызывать только для корректного пути */
+/** СЃРѕР·РґР°РµС‚ РїСѓС‚СЊ РёР· С…РѕРґР°. РІС‹Р·С‹РІР°С‚СЊ С‚РѕР»СЊРєРѕ РґР»СЏ РєРѕСЂСЂРµРєС‚РЅРѕРіРѕ РїСѓС‚Рё */
 	public Way(String step) { //b4-f8
 		step = Static.toDigital(step); //2,4-5,8
 		String[] a_b = step.split(Static.sep_step); //{"2,4","5,8"}
@@ -49,8 +49,7 @@ public class Way {
 	}
 	
 	private void calc_direction() {
-		// TODO Auto-generated method stub
-		//вверх или вниз
+		//РІРІРµСЂС… РёР»Рё РІРЅРёР·
 		dx = b.get_x() - a.get_x();
 		dy = b.get_y() - a.get_y();
 		if (dx == 0) {
@@ -80,7 +79,7 @@ public class Way {
 		return allow_use_way_for_step;
 	}
 	
-/** построение списка позиций и значений  по пути*/	
+/** РїРѕСЃС‚СЂРѕРµРЅРёРµ СЃРїРёСЃРєР° РїРѕР·РёС†РёР№ Рё Р·РЅР°С‡РµРЅРёР№  РїРѕ РїСѓС‚Рё*/	
 	public Vector<PosAndValue> get_massive_figure(Board board) {
 		Vector<PosAndValue> s_mass = new Vector<PosAndValue>();
 		int x;
@@ -118,7 +117,7 @@ public class Way {
 		Way way_candidate;
 		Coordinates second_coord;
 		Vector<Way> vw = new Vector<Way>();
-		for(int i = 1;i <= quan_steps;i++) {//нулевой ход не ход
+		for(int i = 1;i <= quan_steps;i++) {//РЅСѓР»РµРІРѕР№ С…РѕРґ РЅРµ С…РѕРґ
 	      	x = a.get_x()+i*dx_norm;
 			y = a.get_y()+i*dy_norm;
 			second_coord = new Coordinates(x, y);
@@ -131,7 +130,7 @@ public class Way {
 		return vw;
 	}
 	
-	public Boolean way_is_clear(Board board) {//предполагается анализ значений, начиная со второй.
+	public Boolean way_is_clear(Board board) {//РїСЂРµРґРїРѕР»Р°РіР°РµС‚СЃСЏ Р°РЅР°Р»РёР· Р·РЅР°С‡РµРЅРёР№, РЅР°С‡РёРЅР°СЏ СЃРѕ РІС‚РѕСЂРѕР№.
 		Vector<PosAndValue> vpnv = get_massive_figure(board);
 		return board.is_clear_move(vpnv);
 	}
@@ -142,7 +141,7 @@ public class Way {
 		Way way_candidate;
 		Coordinates second_coord;
 		Vector<Way> vw = new Vector<Way>();
-		for(int i = 1;i <= quan_steps;i++) {//нулевой ход не ход
+		for(int i = 1;i <= quan_steps;i++) {//РЅСѓР»РµРІРѕР№ С…РѕРґ РЅРµ С…РѕРґ
 	      	x = a.get_x()+i*dx_norm;
 			y = a.get_y()+i*dy_norm;
 			second_coord = new Coordinates(x, y);
@@ -161,7 +160,6 @@ public class Way {
 		String s2 = Static.get_num_from_y(a.get_y());
 		String s3 = Static.get_abc_from_x(b.get_x());
 		String s4 = Static.get_num_from_y(b.get_y());
-		// TODO Auto-generated method stub
 		return s1 + s2 + Static.sep_step + s3 + s4;
 	}
 
@@ -171,10 +169,10 @@ public class Way {
 		while(i.hasNext()) {
 			String step_vector = i.next().toStep();
 			if(step_way.equals(step_vector)) {
-				return true; //наш путь среди допустимых
+				return true; //РЅР°С€ РїСѓС‚СЊ СЃСЂРµРґРё РґРѕРїСѓСЃС‚РёРјС‹С…
 			}
-			return false; //если не встретил путь среди допустимых
+			return false; //РµСЃР»Рё РЅРµ РІСЃС‚СЂРµС‚РёР» РїСѓС‚СЊ СЃСЂРµРґРё РґРѕРїСѓСЃС‚РёРјС‹С…
 		}
-		return true; //если пуст, то считаем, что ограничений нет(это не следующий огневой ход то же фигурой)
+		return true; //РµСЃР»Рё РїСѓСЃС‚, С‚Рѕ СЃС‡РёС‚Р°РµРј, С‡С‚Рѕ РѕРіСЂР°РЅРёС‡РµРЅРёР№ РЅРµС‚(СЌС‚Рѕ РЅРµ СЃР»РµРґСѓСЋС‰РёР№ РѕРіРЅРµРІРѕР№ С…РѕРґ С‚Рѕ Р¶Рµ С„РёРіСѓСЂРѕР№)
 	}
 }
