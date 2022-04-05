@@ -63,6 +63,7 @@ public class AI {
     }
 
     private int fork() {
+        // future state
         int[] fsGrid = Arrays.copyOf(GridStorage, GridStorage.length);
         int res;
 
@@ -78,7 +79,7 @@ public class AI {
 
         // Build
         for (int i : FreeCells) {
-            fsGrid[i] = -this.Side;
+            fsGrid[i] = this.Side;
             res = win(true, fsGrid);
             if (res == 100) {
                 return i;
@@ -89,6 +90,7 @@ public class AI {
         return -1;
     }
 
+    // Strategic set
     private int stSet() {
         if (UsedCells >= 2) {
             if (GridStorage[4] == 0) return 4;
