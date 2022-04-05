@@ -15,8 +15,8 @@ public class AI {
     private double level;
 
     public AI(int[] grid, int side, AILevel level) {
-        GridStorage = grid;
-        Side = side;
+        this.GridStorage = grid;
+        this.Side = side;
         switch (level) {
             case Beginner -> this.level = 0.3;
             case Normal -> this.level = 0.5;
@@ -48,27 +48,27 @@ public class AI {
             mv = stSet();
             if (mv != -1) return mv;
         }
-        return FreeCells[(int) Math.floor(Math.random() * FreeCells.length)];
+        return this.FreeCells[(int) Math.floor(Math.random() * this.FreeCells.length)];
     }
 
     public void updateFree(int[] freeCells) {
-        FreeCells = freeCells;
-        UsedCells = 9 - freeCells.length;
+        this.FreeCells = freeCells;
+        this.UsedCells = 9 - freeCells.length;
     }
 
     private int first() {
-        if (UsedCells == 1 && GridStorage[4] == 0) return 4;
-        else if (UsedCells <= 1) return Corners[(int) Math.floor(Math.random() * Corners.length)];
+        if (this.UsedCells == 1 && this.GridStorage[4] == 0) return 4;
+        else if (this.UsedCells <= 1) return this.Corners[(int) Math.floor(Math.random() * this.Corners.length)];
         return -1;
     }
 
     private int fork() {
         // future state
-        int[] fsGrid = Arrays.copyOf(GridStorage, GridStorage.length);
+        int[] fsGrid = Arrays.copyOf(this.GridStorage, this.GridStorage.length);
         int res;
 
         // Block
-        for (int i : FreeCells) {
+        for (int i : this.FreeCells) {
             fsGrid[i] = -this.Side;
             res = win(true, fsGrid);
             if (res != -1 && res != 100) {
@@ -78,7 +78,7 @@ public class AI {
         }
 
         // Build
-        for (int i : FreeCells) {
+        for (int i : this.FreeCells) {
             fsGrid[i] = this.Side;
             res = win(true, fsGrid);
             if (res == 100) {
@@ -92,12 +92,12 @@ public class AI {
 
     // Strategic set
     private int stSet() {
-        if (UsedCells >= 2) {
-            if (GridStorage[4] == 0) return 4;
+        if (this.UsedCells >= 2) {
+            if (this.GridStorage[4] == 0) return 4;
             ArrayList<Integer> freeCorners = new ArrayList<>();
-            for (int[] pair : CornerPairs) {
-                if (GridStorage[pair[0]] == 0) {
-                    if (GridStorage[pair[1]] == -Side) return pair[0];
+            for (int[] pair : this.CornerPairs) {
+                if (this.GridStorage[pair[0]] == 0) {
+                    if (this.GridStorage[pair[1]] == -this.Side) return pair[0];
                     freeCorners.add(pair[0]);
                 }
             }
@@ -109,11 +109,11 @@ public class AI {
     }
 
     private int win() {
-        return win(false, GridStorage);
+        return win(false, this.GridStorage);
     }
 
     private int win(boolean forkCheck, int[] grid) {
-        if (UsedCells < 3) {
+        if (this.UsedCells < 3) {
             return -1;
         }
 
@@ -168,7 +168,7 @@ public class AI {
     }
 
     private int[] findEmpty(int c0, int c1, int c2) {
-        return findEmpty(c0, c1, c2, GridStorage);
+        return findEmpty(c0, c1, c2, this.GridStorage);
     }
 
     private int[] findEmpty(int c0, int c1, int c2, int[] grid) {

@@ -38,7 +38,7 @@ public class MainGame {
         String command;
         while (!exitRequested) {
             System.out.print("> ");
-            command = scanner.nextLine();
+            command = this.scanner.nextLine();
 
             switch (command) {
                 case "list", "ls" -> {
@@ -73,7 +73,7 @@ public class MainGame {
                     }
                 }
                 case "lines", "ln" -> {
-                    System.out.printf("Switched to using %s%n", GGrid.toggleMoreLines() ? "more lines" : "compact grid");
+                    System.out.printf("Switched to using %s%n", this.GGrid.toggleMoreLines() ? "more lines" : "compact grid");
                     continue;
                 }
                 case "clean", "cl" -> {
@@ -96,12 +96,12 @@ public class MainGame {
                                     3 Expert
                                     4 Machine
                                     """);
-                            GGrid.resetGrid();
+                            this.GGrid.resetGrid();
                         }
                         case "2" -> {
                             this.mode = GameMode.PVP;
                             this.state = GameState.turnX;
-                            GGrid.resetGrid();
+                            this.GGrid.resetGrid();
                             printBoard();
                         }
                         default -> System.out.println("Wrong input, try again");
@@ -109,21 +109,11 @@ public class MainGame {
                 }
                 case selLevel -> {
                     switch (command.toUpperCase()) {
-                        case "0" -> {
-                            this.aiLevel = AI.AILevel.Beginner;
-                        }
-                        case "1" -> {
-                            this.aiLevel = AI.AILevel.Normal;
-                        }
-                        case "2" -> {
-                            this.aiLevel = AI.AILevel.Advanced;
-                        }
-                        case "3" -> {
-                            this.aiLevel = AI.AILevel.Expert;
-                        }
-                        case "4" -> {
-                            this.aiLevel = AI.AILevel.Machine;
-                        }
+                        case "0" -> this.aiLevel = AI.AILevel.Beginner;
+                        case "1" -> this.aiLevel = AI.AILevel.Normal;
+                        case "2" -> this.aiLevel = AI.AILevel.Advanced;
+                        case "3" -> this.aiLevel = AI.AILevel.Expert;
+                        case "4" -> this.aiLevel = AI.AILevel.Machine;
                         default -> this.aiLevel = AI.AILevel.Normal;
                     }
                     this.state = GameState.selSide;
@@ -138,13 +128,13 @@ public class MainGame {
                         case "X" -> {
                             this.playerSide = PlayerSide.X;
                             this.state = GameState.turnA;
-                            this.Cmp = new AI(GGrid.getGrid(), -1, this.aiLevel);
+                            this.Cmp = new AI(this.GGrid.getGrid(), -1, this.aiLevel);
                             printBoard();
                         }
                         case "0" -> {
                             this.playerSide = PlayerSide.N;
                             this.state = GameState.turnA;
-                            this.Cmp = new AI(GGrid.getGrid(), 1, this.aiLevel);
+                            this.Cmp = new AI(this.GGrid.getGrid(), 1, this.aiLevel);
                             makeMove("cmp");
                             printBoard();
                         }
@@ -202,14 +192,14 @@ public class MainGame {
                 }
                 case end -> {
                     if ("Y".equalsIgnoreCase(command)) {
-                        GGrid.resetGrid();
+                        this.GGrid.resetGrid();
                         if (this.mode == GameMode.PVC) {
                             this.state = GameState.turnA;
                             if (this.playerSide == PlayerSide.N) {
-                                this.Cmp = new AI(GGrid.getGrid(), 1, this.aiLevel);
+                                this.Cmp = new AI(this.GGrid.getGrid(), 1, this.aiLevel);
                                 makeMove("cmp");
                             } else {
-                                this.Cmp = new AI(GGrid.getGrid(), -1, this.aiLevel);
+                                this.Cmp = new AI(this.GGrid.getGrid(), -1, this.aiLevel);
                             }
                         } else {
                             this.state = GameState.turnX;
@@ -232,12 +222,12 @@ public class MainGame {
     private MoveResult makeMove(String move) {
         if (this.mode == GameMode.PVC) {
             if (Objects.equals(move, "cmp")) {
-                this.Cmp.updateFree(GGrid.getFreeCells());
-                GGrid.setCell(this.Cmp.getMove(), this.Cmp.getSide());
+                this.Cmp.updateFree(this.GGrid.getFreeCells());
+                this.GGrid.setCell(this.Cmp.getMove(), this.Cmp.getSide());
             } else {
-                if (!GGrid.setCell(move, this.playerSide == PlayerSide.X ? 1 : -1)) return MoveResult.fail;
+                if (!this.GGrid.setCell(move, this.playerSide == PlayerSide.X ? 1 : -1)) return MoveResult.fail;
             }
-            return switch (GGrid.checkWin()) {
+            return switch (this.GGrid.checkWin()) {
                 case 1 -> MoveResult.winX;
                 case -1 -> MoveResult.winN;
                 case 10 -> MoveResult.draw;
@@ -245,13 +235,13 @@ public class MainGame {
             };
         } else if (this.mode == GameMode.PVP) {
             if (this.state == GameState.turnX) {
-                if (!GGrid.setCell(move, 1)) return MoveResult.fail;
+                if (!this.GGrid.setCell(move, 1)) return MoveResult.fail;
             } else if (this.state == GameState.turnN) {
-                if (!GGrid.setCell(move, -1)) return MoveResult.fail;
+                if (!this.GGrid.setCell(move, -1)) return MoveResult.fail;
             } else {
                 return MoveResult.fail;
             }
-            return switch (GGrid.checkWin()) {
+            return switch (this.GGrid.checkWin()) {
                 case 1 -> MoveResult.winX;
                 case -1 -> MoveResult.winN;
                 case 10 -> MoveResult.draw;
@@ -263,18 +253,18 @@ public class MainGame {
 
     private void printBoard() {
         if (this.CleanOut)
-            stringBuilder.append("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
-        stringBuilder.append(GGrid.getDisplayString());
-        stringBuilder.append("\n\n");
+            this.stringBuilder.append("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+        this.stringBuilder.append(this.GGrid.getDisplayString());
+        this.stringBuilder.append("\n\n");
         if (this.state == GameState.turnX) {
-            stringBuilder.append("X turn:\n");
+            this.stringBuilder.append("X turn:\n");
         } else if (this.state == GameState.turnN) {
-            stringBuilder.append("0 turn:\n");
+            this.stringBuilder.append("0 turn:\n");
         } else if (this.state == GameState.turnA) {
-            stringBuilder.append("Your turn:\n");
+            this.stringBuilder.append("Your turn:\n");
         }
-        System.out.print(stringBuilder);
-        stringBuilder.delete(0, stringBuilder.length());
+        System.out.print(this.stringBuilder);
+        this.stringBuilder.delete(0, this.stringBuilder.length());
     }
 
     private enum GameState {

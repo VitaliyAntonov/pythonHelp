@@ -1,7 +1,5 @@
 package oxcs.MainGame;
 
-import java.util.Locale;
-
 public class GameGrid {
 
     private final StringBuilder stringBuilder;
@@ -11,7 +9,7 @@ public class GameGrid {
     private int[] FreeCells = new int[9];
 
     public GameGrid() {
-        stringBuilder = new StringBuilder();
+        this.stringBuilder = new StringBuilder();
     }
 
     public void resetGrid() {
@@ -21,9 +19,9 @@ public class GameGrid {
     }
 
     public void fillGridRand() {
-        for (int i = 0; i < GridStorage.length; i++) {
-            GridStorage[i] = -1 + (int) Math.round(Math.random() * 2);
-            if (GridStorage[i] != 0) UsedCells++;
+        for (int i = 0; i < this.GridStorage.length; i++) {
+            this.GridStorage[i] = -1 + (int) Math.round(Math.random() * 2);
+            if (this.GridStorage[i] != 0) this.UsedCells++;
         }
     }
 
@@ -32,11 +30,11 @@ public class GameGrid {
     }
 
     public int[] getGrid() {
-        return GridStorage;
+        return this.GridStorage;
     }
 
     public int[] getFreeCells() {
-        return FreeCells;
+        return this.FreeCells;
     }
 
     public boolean setCell(String address, int val) {
@@ -56,46 +54,46 @@ public class GameGrid {
     }
 
     public String getDisplayString() {
-        stringBuilder.delete(0, stringBuilder.length());
-        stringBuilder.append("  A B C");
+        this.stringBuilder.delete(0, this.stringBuilder.length());
+        this.stringBuilder.append("  A B C");
 
-        for (int i = 0; i < GridStorage.length; i++) {
+        for (int i = 0; i < this.GridStorage.length; i++) {
             if (i % 3 == 0) {
-                if (UseMoreLines) stringBuilder.append(i > 2 ? "\n |-----|\n" : "\n -------\n");
-                else stringBuilder.append('\n');
-                stringBuilder.append(1 + i / 3);
-                stringBuilder.append('|');
+                if (this.UseMoreLines) this.stringBuilder.append(i > 2 ? "\n |-----|\n" : "\n -------\n");
+                else this.stringBuilder.append('\n');
+                this.stringBuilder.append(1 + i / 3);
+                this.stringBuilder.append('|');
             }
-            stringBuilder.append(getSymbol(GridStorage[i]));
-            stringBuilder.append('|');
+            this.stringBuilder.append(getSymbol(this.GridStorage[i]));
+            this.stringBuilder.append('|');
         }
-        stringBuilder.append(UseMoreLines ? "\n -------" : "");
-        return stringBuilder.toString();
+        this.stringBuilder.append(this.UseMoreLines ? "\n -------" : "");
+        return this.stringBuilder.toString();
     }
 
 
     public int checkWin() {
-        if (UsedCells < 3) {
+        if (this.UsedCells < 3) {
             return 0;
-        } else if (UsedCells == 9) {
+        } else if (this.UsedCells == 9) {
             return 10;
         }
         int check;
         int res;
         for (int i = 0; i < 9; i += 3) {
-            check = GridStorage[i] + GridStorage[i + 1] + GridStorage[i + 2];
+            check = this.GridStorage[i] + this.GridStorage[i + 1] + this.GridStorage[i + 2];
             res = ch(check);
             if (res != 0) return res;
         }
         for (int i = 0; i < 3; i++) {
-            check = GridStorage[i] + GridStorage[i + 3] + GridStorage[i + 6];
+            check = this.GridStorage[i] + this.GridStorage[i + 3] + this.GridStorage[i + 6];
             res = ch(check);
             if (res != 0) return res;
         }
-        check = GridStorage[0] + GridStorage[4] + GridStorage[8];
+        check = this.GridStorage[0] + this.GridStorage[4] + this.GridStorage[8];
         res = ch(check);
         if (res != 0) return res;
-        check = GridStorage[2] + GridStorage[4] + GridStorage[6];
+        check = this.GridStorage[2] + this.GridStorage[4] + this.GridStorage[6];
         return ch(check);
     }
 
