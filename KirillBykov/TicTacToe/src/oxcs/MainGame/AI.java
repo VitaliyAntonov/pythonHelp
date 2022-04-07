@@ -1,7 +1,6 @@
 package oxcs.MainGame;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.*;
 
 public class AI {
 
@@ -65,27 +64,53 @@ public class AI {
     private int fork() {
         // future state
         int[] fsGrid = Arrays.copyOf(this.GridStorage, this.GridStorage.length);
+        int[] fsGridDeep = Arrays.copyOf(this.GridStorage, this.GridStorage.length);
+        Set<Integer> preList = new HashSet<>();
+        Set<Integer> blockReq = new HashSet<>();
+        Map<Integer, Integer> forcedCell = new HashMap<>();
+        List<Integer> resList;
+        List<Integer> deepWinRes;
         int res;
 
         // Block
         for (int i : this.FreeCells) {
             fsGrid[i] = -this.Side;
-            res = win(true, fsGrid);
-            if (res != -1 && res != 100) {
-                return res;
+            deepWinRes = deepWin(fsGrid);
+            if (deepWinRes != null && deepWinRes.get(0) != 100) {
+                blockReq.add(i);
+                for (int block : deepWinRes) {
+                    fsGridDeep[block] = this.Side;
+                    res = win(fsGridDeep);
+                    if (res != -1 && res != i) {
+                        preList.add(block);
+                        forcedCell.put(block, res);
+                    }
+                    fsGridDeep[block] = 0;
+                }
             }
             fsGrid[i] = 0;
+        }
+        if (preList.size() > 0) {
+            resList = new ArrayList<>();
+            for (int mv : preList) {
+                if (!blockReq.contains(forcedCell.get(mv))) {
+                    resList.add(mv);
+                }
+            }
+            if (resList.size() > 0) return resList.get((int) Math.floor(Math.random() * resList.size()));
         }
 
         // Build
+        resList = new ArrayList<>();
         for (int i : this.FreeCells) {
             fsGrid[i] = this.Side;
-            res = win(true, fsGrid);
-            if (res == 100) {
-                return i;
+            deepWinRes = deepWin(fsGrid);
+            if (deepWinRes != null && deepWinRes.get(0) == 100) {
+                resList.add(i);
             }
             fsGrid[i] = 0;
         }
+        if (resList.size() > 0) return resList.get((int) Math.floor(Math.random() * resList.size()));
 
         return -1;
     }
@@ -109,66 +134,84 @@ public class AI {
     }
 
     private int win() {
-        return win(false, this.GridStorage);
+        return win(this.GridStorage);
     }
 
-    private int win(boolean forkCheck, int[] grid) {
+    private int win(int[] grid) {
         if (this.UsedCells < 3) {
             return -1;
         }
 
         ArrayList<Integer> blocks = new ArrayList<>();
-        ArrayList<Integer> wins = null;
-        if (forkCheck) wins = new ArrayList<>();
         int[] res;
 
         // Rows
         for (int i = 0; i < 9; i += 3) {
             res = findEmpty(i, i + 1, i + 2, grid);
-            if (res[1] == this.Side) {
-                if (!forkCheck) return res[0];
-                else wins.add(res[0]);
-            }
+            if (res[1] == this.Side) return res[0];
             if (res[1] == -this.Side) blocks.add(res[0]);
         }
 
         // Cols
         for (int i = 0; i < 3; i++) {
             res = findEmpty(i, i + 3, i + 6, grid);
-            if (res[1] == this.Side) {
-                if (!forkCheck) return res[0];
-                else wins.add(res[0]);
-            }
+            if (res[1] == this.Side) return res[0];
             if (res[1] == -this.Side) blocks.add(res[0]);
         }
 
         // \
         res = findEmpty(0, 4, 8, grid);
-        if (res[1] == this.Side) {
-            if (!forkCheck) return res[0];
-            else wins.add(res[0]);
-        }
+        if (res[1] == this.Side) return res[0];
         if (res[1] == -this.Side) blocks.add(res[0]);
 
         // /
         res = findEmpty(2, 4, 6, grid);
-        if (res[1] == this.Side) {
-            if (!forkCheck) return res[0];
-            else wins.add(res[0]);
-        }
+        if (res[1] == this.Side) return res[0];
         if (res[1] == -this.Side) blocks.add(res[0]);
 
-        if (!forkCheck && blocks.size() > 0) {
+        if (blocks.size() > 0) {
             return blocks.get(0);
-        } else if (forkCheck) {
-            if (blocks.size() > 1) return blocks.get(0);
-            if (wins.size() > 1) return 100;
         }
         return -1;
     }
 
-    private int[] findEmpty(int c0, int c1, int c2) {
-        return findEmpty(c0, c1, c2, this.GridStorage);
+    private List<Integer> deepWin(int[] grid) {
+        if (this.UsedCells < 3) {
+            return null;
+        }
+
+        ArrayList<Integer> blocks = new ArrayList<>();
+        ArrayList<Integer> wins = new ArrayList<>();
+        int[] res;
+
+        // Rows
+        for (int i = 0; i < 9; i += 3) {
+            res = findEmpty(i, i + 1, i + 2, grid);
+            if (res[1] == this.Side) wins.add(res[0]);
+            if (res[1] == -this.Side) blocks.add(res[0]);
+        }
+
+        // Cols
+        for (int i = 0; i < 3; i++) {
+            res = findEmpty(i, i + 3, i + 6, grid);
+            if (res[1] == this.Side) wins.add(res[0]);
+            if (res[1] == -this.Side) blocks.add(res[0]);
+        }
+
+        // \
+        res = findEmpty(0, 4, 8, grid);
+        if (res[1] == this.Side) wins.add(res[0]);
+        if (res[1] == -this.Side) blocks.add(res[0]);
+
+        // /
+        res = findEmpty(2, 4, 6, grid);
+        if (res[1] == this.Side) wins.add(res[0]);
+        if (res[1] == -this.Side) blocks.add(res[0]);
+
+        if (blocks.size() > 1) return blocks;
+        if (wins.size() > 1) return List.of(100);
+
+        return null;
     }
 
     private int[] findEmpty(int c0, int c1, int c2, int[] grid) {

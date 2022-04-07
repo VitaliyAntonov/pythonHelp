@@ -37,6 +37,10 @@ public class GameGrid {
         return this.FreeCells;
     }
 
+    public int getUsedCells() {
+        return this.UsedCells;
+    }
+
     public boolean setCell(String address, int val) {
         int cellId = cellStrToId(address);
         return setCell(cellId, val);
@@ -73,10 +77,8 @@ public class GameGrid {
 
 
     public int checkWin() {
-        if (this.UsedCells < 3) {
+        if (this.UsedCells <= 3) {
             return 0;
-        } else if (this.UsedCells == 9) {
-            return 10;
         }
         int check;
         int res;
@@ -94,7 +96,12 @@ public class GameGrid {
         res = ch(check);
         if (res != 0) return res;
         check = this.GridStorage[2] + this.GridStorage[4] + this.GridStorage[6];
-        return ch(check);
+        res = ch(check);
+        if (res != 0) return res;
+        if (this.UsedCells == 9) {
+            return 10;
+        }
+        return 0;
     }
 
     private int ch(int check) {

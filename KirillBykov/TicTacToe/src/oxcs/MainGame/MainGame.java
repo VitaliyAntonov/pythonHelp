@@ -15,7 +15,7 @@ public class MainGame {
     private StringBuilder stringBuilder;
     private AI Cmp;
 
-    private boolean CleanOut = true;
+    private boolean CleanOut = false;
 
     public void Start() {
         this.GGrid = new GameGrid();
@@ -50,7 +50,7 @@ public class MainGame {
                             list |ls  see this list
 
                             lines|ln  toggle more or less output lines   [def: less]
-                            clean|cl  toggle "clean" or "history" output [def: clean]
+                            clean|cl  toggle "clean" or "history" output [def: history]
                             """);
                     continue;
                 }
@@ -144,7 +144,7 @@ public class MainGame {
                 case turnX, turnN -> {
                     var res = makeMove(command);
                     switch (res) {
-                        case fail -> System.out.println("Illegal move, try again");
+                        case fail -> System.out.println("Illegal move, try again. Move format example: A1");
                         case winX, winN -> {
                             this.state = GameState.end;
                             printBoard();
@@ -169,19 +169,19 @@ public class MainGame {
                         var res = makeMove(c);
                         switch (res) {
                             case fail -> {
-                                System.out.println("Illegal move, try again");
+                                System.out.println("Illegal move, try again. Move format example: A1");
                                 brk = true;
                             }
                             case winX, winN -> {
                                 this.state = GameState.end;
                                 printBoard();
-                                System.out.printf("%s won!\nPlay again? [Y/N]", (res == MoveResult.winX && this.playerSide == PlayerSide.X) || (res == MoveResult.winN && this.playerSide == PlayerSide.N) ? "You" : "Computer");
+                                System.out.printf("%s won!\nPlay again? [Y/N]\n", (res == MoveResult.winX && this.playerSide == PlayerSide.X) || (res == MoveResult.winN && this.playerSide == PlayerSide.N) ? "You" : "Computer");
                                 brk = true;
                             }
                             case draw -> {
                                 this.state = GameState.end;
                                 printBoard();
-                                System.out.print("Draw\nPlay again? [Y/N]");
+                                System.out.print("Draw\nPlay again? [Y/N]\n");
                                 brk = true;
                             }
                         }
@@ -224,36 +224,51 @@ public class MainGame {
             if (Objects.equals(move, "cmp")) {
                 this.Cmp.updateFree(this.GGrid.getFreeCells());
                 this.GGrid.setCell(this.Cmp.getMove(), this.Cmp.getSide());
+                if (checkMoveResult() == MoveResult.normal && this.GGrid.getUsedCells() == 8) {
+                    this.GGrid.setCell((this.GGrid.getFreeCells())[0], -this.Cmp.getSide());
+                }
             } else {
                 if (!this.GGrid.setCell(move, this.playerSide == PlayerSide.X ? 1 : -1)) return MoveResult.fail;
             }
-            return switch (this.GGrid.checkWin()) {
-                case 1 -> MoveResult.winX;
-                case -1 -> MoveResult.winN;
-                case 10 -> MoveResult.draw;
-                default -> MoveResult.normal;
-            };
+            return checkMoveResult();
         } else if (this.mode == GameMode.PVP) {
             if (this.state == GameState.turnX) {
-                if (!this.GGrid.setCell(move, 1)) return MoveResult.fail;
+                if (this.GGrid.setCell(move, 1)) {
+                    if (checkMoveResult() == MoveResult.normal && this.GGrid.getUsedCells() == 8) {
+                        this.GGrid.setCell((this.GGrid.getFreeCells())[0], -1);
+                    }
+                } else {
+                    return MoveResult.fail;
+                }
             } else if (this.state == GameState.turnN) {
-                if (!this.GGrid.setCell(move, -1)) return MoveResult.fail;
+                if (this.GGrid.setCell(move, -1)) {
+                    if (checkMoveResult() == MoveResult.normal && this.GGrid.getUsedCells() == 8) {
+                        this.GGrid.setCell((this.GGrid.getFreeCells())[0], 1);
+                    }
+                } else {
+                    return MoveResult.fail;
+                }
             } else {
                 return MoveResult.fail;
             }
-            return switch (this.GGrid.checkWin()) {
-                case 1 -> MoveResult.winX;
-                case -1 -> MoveResult.winN;
-                case 10 -> MoveResult.draw;
-                default -> MoveResult.normal;
-            };
+            return checkMoveResult();
         }
         return MoveResult.fail;
+    }
+
+    private MoveResult checkMoveResult() {
+        return switch (this.GGrid.checkWin()) {
+            case 1 -> MoveResult.winX;
+            case -1 -> MoveResult.winN;
+            case 10 -> MoveResult.draw;
+            default -> MoveResult.normal;
+        };
     }
 
     private void printBoard() {
         if (this.CleanOut)
             this.stringBuilder.append("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+        this.stringBuilder.append('\n');
         this.stringBuilder.append(this.GGrid.getDisplayString());
         this.stringBuilder.append("\n\n");
         if (this.state == GameState.turnX) {
@@ -261,7 +276,9 @@ public class MainGame {
         } else if (this.state == GameState.turnN) {
             this.stringBuilder.append("0 turn:\n");
         } else if (this.state == GameState.turnA) {
-            this.stringBuilder.append("Your turn:\n");
+            this.stringBuilder.append("Your turn [");
+            this.stringBuilder.append(this.playerSide == PlayerSide.X ? 'X' : '0');
+            this.stringBuilder.append("]:\n");
         }
         System.out.print(this.stringBuilder);
         this.stringBuilder.delete(0, this.stringBuilder.length());
