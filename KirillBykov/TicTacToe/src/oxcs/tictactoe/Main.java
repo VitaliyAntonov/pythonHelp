@@ -1,6 +1,6 @@
-package oxcs;
+package oxcs.tictactoe;
 
-import oxcs.MainGame.MainGame;
+import oxcs.tictactoe.MainGame.MainGame;
 
 public class Main {
 
@@ -10,4 +10,3 @@ public class Main {
     }
 
 }
-

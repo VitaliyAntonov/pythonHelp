@@ -1,4 +1,4 @@
-package oxcs.MainGame;
+package oxcs.tictactoe.MainGame;
 
 public class GameGrid {
 

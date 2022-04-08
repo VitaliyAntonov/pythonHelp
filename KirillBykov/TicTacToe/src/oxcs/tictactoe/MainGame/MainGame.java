@@ -1,4 +1,4 @@
-package oxcs.MainGame;
+package oxcs.tictactoe.MainGame;
 
 import java.util.Objects;
 import java.util.Scanner;
@@ -57,6 +57,7 @@ public class MainGame {
                 case "start", "st" -> {
                     this.state = GameState.mode;
                     System.out.print("""
+                                                        
                             Please select playing mode:
                             1 for Player vs Computer
                             2 for Player vs Player
@@ -68,16 +69,16 @@ public class MainGame {
                     this.state = GameState.none;
                     System.out.println("Bye");
                     try {
-                        Thread.sleep(250);
+                        Thread.sleep(350);
                     } catch (InterruptedException ignored) {
                     }
                 }
                 case "lines", "ln" -> {
-                    System.out.printf("Switched to using %s%n", this.GGrid.toggleMoreLines() ? "more lines" : "compact grid");
+                    System.out.printf("%nSwitched to using %s%n", this.GGrid.toggleMoreLines() ? "more lines" : "compact grid");
                     continue;
                 }
                 case "clean", "cl" -> {
-                    System.out.printf("Switched to using %s%n", this.toggleCleanOut() ? "clean output" : "history output");
+                    System.out.printf("%nSwitched to using %s%n", this.toggleCleanOut() ? "clean output" : "history output");
                     continue;
                 }
             }
@@ -89,6 +90,7 @@ public class MainGame {
                             this.mode = GameMode.PVC;
                             this.state = GameState.selLevel;
                             System.out.print("""
+                                                                        
                                     Please select Computer level (difficulty):
                                     0 Beginner
                                     1 Normal [def]
@@ -118,6 +120,7 @@ public class MainGame {
                     }
                     this.state = GameState.selSide;
                     System.out.print("""
+                                                        
                             Please select Player side:
                             X
                             0
@@ -131,7 +134,7 @@ public class MainGame {
                             this.Cmp = new AI(this.GGrid.getGrid(), -1, this.aiLevel);
                             printBoard();
                         }
-                        case "0" -> {
+                        case "0", "O" -> {
                             this.playerSide = PlayerSide.N;
                             this.state = GameState.turnA;
                             this.Cmp = new AI(this.GGrid.getGrid(), 1, this.aiLevel);
@@ -175,7 +178,7 @@ public class MainGame {
                             case winX, winN -> {
                                 this.state = GameState.end;
                                 printBoard();
-                                System.out.printf("%s won!\nPlay again? [Y/N]\n", (res == MoveResult.winX && this.playerSide == PlayerSide.X) || (res == MoveResult.winN && this.playerSide == PlayerSide.N) ? "You" : "Computer");
+                                System.out.printf("%s won!%nPlay again? [Y/N]%n", (res == MoveResult.winX && this.playerSide == PlayerSide.X) || (res == MoveResult.winN && this.playerSide == PlayerSide.N) ? "You" : "Computer");
                                 brk = true;
                             }
                             case draw -> {
@@ -208,6 +211,7 @@ public class MainGame {
                     } else {
                         this.state = GameState.none;
                         System.out.print("""
+                                                                
                                 Welcome to Tic-Tac-Toe
                                 type "list" for commands
                                 """);

@@ -1,4 +1,4 @@
-package oxcs.MainGame;
+package oxcs.tictactoe.MainGame;
 
 import java.util.*;
 
