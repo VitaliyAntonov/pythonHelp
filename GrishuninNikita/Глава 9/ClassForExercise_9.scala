@@ -1,0 +1,3 @@
+class ClassForExercise_9 {
+
+}
