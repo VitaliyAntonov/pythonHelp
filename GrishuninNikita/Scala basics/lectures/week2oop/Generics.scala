@@ -48,7 +48,7 @@ object Generics extends App {
   // Таким образом - мы говорим, что классу Food подходят только параметры типа T, причем этот тип должен быть подтипом Fruit.
   // Так как Banana extends Fruit, то Banana нам отлично подойдет.
   class Pizza
-  val moreFood = new Food(new Pizza) // В данном случае никаких связей между Pizza и Fruit не задано
+ // val moreFood = new Food(new Pizza) // В данном случае никаких связей между Pizza и Fruit не задано
   // Предварительно никакого сообщения об ошибке вы не увидите, запустить код вы не сможете, лишь словите inferred type arguments do not conform to value <local Food>'s type parameter bounds
 
   class Food2[T >: Fruit](fruit: T) // T >: Fruit - ограничение нижнего типа

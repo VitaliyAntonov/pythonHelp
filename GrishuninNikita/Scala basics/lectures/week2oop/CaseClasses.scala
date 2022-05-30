@@ -9,7 +9,7 @@ object CaseClasses extends App {
   println(bob == bobsDouble) // Вернет true
   // В case классах доступен метод copy, он позволяет скопировать экземпляр класса, так и скопировать с измененными аругментами
   val bobsCopy = bob.copy(occupation = "Data Engineer") // К нему можно применить инфиксную нотацию
-  val bobsCopyCopy = bob copy()
+  //val bobsCopyCopy = bob copy()
   // Любой case класс имеет объект компаньон, в нем всегда присутствует метод apply
   val alice = Person("Alice", "Engineer") // Метод apply позволяет объявлять экземпляр класса без слова new
 }
