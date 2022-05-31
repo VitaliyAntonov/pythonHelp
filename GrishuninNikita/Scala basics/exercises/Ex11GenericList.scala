@@ -32,7 +32,6 @@ object Ex11GenericList extends App {
     override def all: String = " "
     override def isEmpty: Boolean = true
   }
-  val list = new Log[Int](1, new Log[Float](2.0f, new Log[Double](3.0, Empty)))
+  //val list = new Log[Int](1, new Log[Float](2.0f, new Log[Double](3.0, Empty)))
   val intLogs: LogList[Int] = Empty
-  println(list.all)
 }
