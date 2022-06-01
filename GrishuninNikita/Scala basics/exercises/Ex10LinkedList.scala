@@ -16,9 +16,9 @@ object Ex10LinkedList extends App {
     override def last: String = head
     override def all: String = {
       @tailrec
-      def loop(head: String = head, tail: LogList = tail): String = {
-        if(tail.isEmpty) head
-        else print(s"$head "); loop(tail.last, tail.previous)
+      def loop(head: String = head, tail: LogList = tail, acc: String = ""): String = {
+        if(tail.isEmpty) s"$acc $head"
+        else loop(tail.last, tail.previous, if (acc == "") head else s"$acc $head")
       }
       loop()
     }
@@ -29,9 +29,10 @@ object Ex10LinkedList extends App {
     override def add(msg: String): LogList = new Log(msg, Empty)
     override def previous = throw new NoSuchElementException
     override def last: String = throw new NoSuchElementException
-    override def all: String = "Empty"
+    override def all: String = ""
     override def isEmpty: Boolean = true
   }
   val list = new Log("m1", new Log("m2", new Log("m3", new Log("m4", Empty))))
   println(list.all)
+  println("" +"m1 m2 m3 m4")
 }
