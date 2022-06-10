@@ -10,7 +10,7 @@ object Ex6Monads extends App {
     def findUser(users: List[User], name: String): List[User] = users.filter(_.name == name)
   }
   def getBf(user: User): List[User] = List(user.bf)
-  val nameToFind = "John"
+  val nameToFind = "Mike"
   val bf = Service.findUser(users, nameToFind).flatMap(getBf).flatMap(getBf)
   println(bf.map(_.name))
 }
