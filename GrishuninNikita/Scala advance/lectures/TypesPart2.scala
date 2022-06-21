@@ -120,8 +120,8 @@ object CyclicDependencies{
   // Циклические зависимости
 
   // Код вида
-  class A extends B
-  class B extends A
+  //class A extends B
+  //class B extends A
   // не скомпилируется по причине illegal cyclic reference involving class A
 
   // Однако проблема решится при использовании self type:
