@@ -1,4 +1,4 @@
-# Documentation
+# Руководство использования
 
 1. Запустите tictactoe.py 
 
