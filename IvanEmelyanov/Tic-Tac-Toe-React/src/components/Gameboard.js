@@ -4,7 +4,6 @@ import './Gameboard.css';
 
 function Gameboard({cells, click, win}) {
     const addWinningScreen = () => {
-        console.log(win);
         return <div className='gameboard content-flex winner-box'></div>; 
     };
 
