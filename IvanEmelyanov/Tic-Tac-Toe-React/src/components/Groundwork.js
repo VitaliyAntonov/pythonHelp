@@ -28,13 +28,12 @@ function Groundwork() {
     const buttonClear = () => { 
         setGameArray(new Array(9).fill(null));
         setCurrentMove(['X', 'O']);
-
-        gameArray.forEach((el, i) => document.getElementById(i).removeAttribute('style'));
+        setNobodyWin(false);
     };
 
     return (
         <div className='groundwork content-flex'>
-            <div className="winner-is content-flex">{ checkWinning(gameArray) ? `The winner is: ${checkWinning(gameArray)}` : nobodyWin ? 'Nobody Win' : '' }</div>
+            <div className="winner-is content-flex">{ checkWinning(gameArray) ? `The winner is: ${checkWinning(gameArray)[0]}` : nobodyWin ? 'Nobody Win' : '' }</div>
             <Gameboard cells={gameArray} click={playerTurn} win={checkWinning(gameArray)} />
             <button className="btn-clear" onClick={buttonClear}>Очистить поле</button>
         </div>

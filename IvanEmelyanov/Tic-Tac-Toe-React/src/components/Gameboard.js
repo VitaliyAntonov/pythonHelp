@@ -4,12 +4,13 @@ import './Gameboard.css';
 
 function Gameboard({cells, click, win}) {
     const addWinningScreen = () => {
+        console.log(win);
         return <div className='gameboard content-flex winner-box'></div>; 
     };
 
     return (
         <div className='gameboard content-flex'>
-            { cells.map((val, ind) => <Cell key={ind} id={ind} value={val} cellclick={() => click(ind)} />) }
+            { cells.map((val, ind) => <Cell key={ind} id={ind} value={val} cellclick={() => click(ind)} winarray={win} />) }
             { win && addWinningScreen() }
         </div>
     );

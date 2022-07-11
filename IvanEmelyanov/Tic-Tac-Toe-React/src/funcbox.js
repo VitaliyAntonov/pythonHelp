@@ -16,10 +16,7 @@ export const checkWinning = gameArray => {
         const scnd = gameArray[j];
         const thrd = gameArray[k];
         if (frst && frst === scnd && scnd === thrd) {
-            for (const elem of combination) {
-                document.getElementById(elem).style.color = '#a00';
-            }
-            return frst;
+            return [frst, i, j, k];
         }
     }
 };

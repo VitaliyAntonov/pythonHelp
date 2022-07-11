@@ -8,6 +8,11 @@
     font-size: 80px;
     color: #233;
 }
+
+.winner-cell {
+    color: #a00;
+}
+
 div.cell:hover {
     background-color: #ddd;
 }
