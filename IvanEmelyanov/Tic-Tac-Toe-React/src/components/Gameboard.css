@@ -1,0 +1,26 @@
+.gameboard {
+    width: 450px;
+    height: 450px;
+    flex-wrap: wrap;
+    border: 3px solid #dcdcdc;
+    border-radius: 22px;
+    background-color: #f5f5f5;
+}
+
+.winner-box {
+    position: absolute;
+    background-color: #aff;
+    -moz-animation: winbox 2s forwards;
+    -webkit-animation: winbox 2s forwards;
+    animation: winbox 2s forwards;
+}
+
+@-webkit-keyframes winbox {
+    0% {opacity: 0;}
+    100% {opacity: .5;}
+    }
+
+@keyframes winbox {
+    0% {opacity: 0;}
+    100% {opacity: .5;}
+}

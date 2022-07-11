@@ -1,5 +1,6 @@
 import React from 'react';
 import Cell from './Cell';
+import './Gameboard.css';
 
 function Gameboard({cells, click, win}) {
     const addWinningScreen = () => {

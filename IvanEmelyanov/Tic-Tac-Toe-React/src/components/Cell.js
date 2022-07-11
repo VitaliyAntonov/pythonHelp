@@ -1,4 +1,5 @@
 import React from 'react';
+import './cell.css';
 
 function Cell({id, value, cellclick}) {
     return (

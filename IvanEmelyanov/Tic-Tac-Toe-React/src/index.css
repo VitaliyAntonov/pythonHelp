@@ -1,40 +1,9 @@
-body {
-  margin: 0;
-}
-
-.base {
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background-color: blueviolet;
-}
-
-.field {
-  height: 300px;
-  width: 300px;
-}
-
-.cell-container {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-}
-
-.cell-square {
-  height: 100px;
-  width: 100px;
-  background-color: whitesmoke;
-  border: 1px solid violet;
-  box-sizing: border-box;
-}
-
-.xo {
-  font-family: 'Fredoka One', cursive;
-  font-size: 65px;
-}
-
-.text {
-  font-family: 'Raleway', sans-serif;
+body,
+html,
+#root {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    border: 0;
 }
