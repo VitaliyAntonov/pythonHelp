@@ -1,0 +1,80 @@
+.choise-screen {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    -moz-animation: choisein 1s forwards;
+    -webkit-animation: choisein 1s forwards;
+    animation: choisein 1s forwards;
+}
+
+@-webkit-keyframes choisein {
+    0% {opacity: 0;}
+    100% {opacity: 1;}
+    }
+
+@keyframes choisein {
+    0% {opacity: 0;}
+    100% {opacity: 1;}
+}
+
+.choise-complit {
+    -moz-animation: choiseout 1s forwards;
+    -webkit-animation: choiseout 1s forwards;
+    animation: choiseout 1s forwards;
+}
+
+@-webkit-keyframes choiseout {
+    0% {opacity: 1;}
+    100% {opacity: 0; visibility: hidden;}
+    }
+
+@keyframes choiseout {
+    0% {opacity: 1;}
+    100% {opacity: 0; visibility: hidden;}
+}
+
+.black-screen {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-color: #122c2c;
+    -webkit-opacity: 0.9;
+    -moz-opacity: 0.9;
+    opacity: 0.95;
+}
+
+.choise-container {
+    flex-direction: column;
+    z-index: 1;
+}
+
+.choise-message {
+    width: 100%;
+    font-family: 'Fredoka One', cursive;
+    text-align: center;
+    font-size: 50px;
+    color: #fff;
+    text-transform: uppercase;
+}
+
+.choise-buttons-container {
+    flex-direction: row;
+}
+
+.btn-choise {
+    width: 100px;
+    height: 100px;
+    margin: 70px 35px 0;
+    font-family: 'Fredoka One', cursive;
+    font-size: 70px;
+    color: #dbdbdb;
+    text-transform: uppercase;
+    border: 1px solid #dbdbdb;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-choise:hover {
+    font-size: 75px;
+    color: #fff;
+}

@@ -2,7 +2,7 @@ import React from 'react';
 import Cell from './Cell';
 import './Gameboard.css';
 
-function Gameboard({cells, click, win}) {
+function Gameboard({ cells, click, win }) {
     const addWinningScreen = () => {
         return <div className='gameboard content-flex winner-box'></div>; 
     };
