@@ -10,15 +10,6 @@ function Groundwork() {
     const [players, setPlayers] = useState({hu: 'X', ai: 'O'});
     const [nobodyWin, setNobodyWin] = useState(false);
 
-    const whoFirst = choise => {
-        setStartScreen(false);
-
-        if (choise === 'O') {
-            setPlayers({hu: 'O', ai: 'X'});
-            aiTurn();
-        }
-    };
-
     const playerTurn = cell => {
         const tempGameArray = [...gameArray];
 
@@ -38,12 +29,20 @@ function Groundwork() {
     };
 
     const aiTurn = () => {
+        setStartScreen(false);
+        console.log(startScreen);
+        setPlayers({hu: 'O', ai: 'X'});
+
         const tempGameArray = [...gameArray];
 
         const cellAi = minimax(tempGameArray, players.hu, players.ai, players.hu).index;
         tempGameArray[cellAi] = players.hu;
 
         setGameArray(tempGameArray);
+    };
+
+    const whoFirst = () => {
+        setStartScreen(false);
     };
 
     const buttonClear = () => {
@@ -55,7 +54,7 @@ function Groundwork() {
 
     return (
         <div className='groundwork content-flex'>
-            <Chooseplayer start={whoFirst} status={startScreen} />
+            <Chooseplayer startX={whoFirst} startO={aiTurn} status={startScreen} />
             <div className='winner-is content-flex'>{checkWinning(gameArray) ? `The winner is: ${checkWinning(gameArray)[0]}` : nobodyWin ? 'Nobody Win' : ''}</div>
             <Gameboard cells={gameArray} click={playerTurn} win={checkWinning(gameArray)} />
             <button className='btn-clear' onClick={buttonClear}>Начать заново</button>

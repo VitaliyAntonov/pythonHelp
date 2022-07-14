@@ -15,8 +15,8 @@ function Chooseplayer(props) {
             <div className='choise-container'>
                 <div className='choise-message'>Choose your<br/>player</div>
                 <div className='choise-buttons-container content-flex'>
-                    <div className='btn-choise content-flex' onClick={() => props.start('X')}>X</div>
-                    <div className='btn-choise content-flex' onClick={() => props.start('O')}>O</div>
+                    <div className='btn-choise content-flex' onClick={() => props.startX()}>X</div>
+                    <div className='btn-choise content-flex' onClick={() => props.startO()}>O</div>
                 </div>
             </div>
         </div>
